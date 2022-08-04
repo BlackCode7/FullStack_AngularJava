@@ -1,0 +1,25 @@
+<html>
+    <body>
+        Atualizando escopo
+
+        <script>
+
+            var serie = "friends"// Aqui sofre elevação
+            let serie2 = "game of thrones" // aqui não sofre elevação
+
+            function escopoFuncao() {}escopoFuncao();
+
+            if (true) {
+                if (true) {
+                    console.log("funcao: ", serie)
+                    console.log("funcao: ", serie2)
+                }
+            }
+
+            {
+                console.log("funcao: ", serie)
+                console.log("funcao: ", serie2)
+            }
+        </script>
+    </body>
+</html>

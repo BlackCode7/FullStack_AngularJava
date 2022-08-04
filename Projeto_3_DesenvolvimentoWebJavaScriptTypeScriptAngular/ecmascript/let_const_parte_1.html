@@ -1,0 +1,26 @@
+<html>
+    <body>
+        Atualizando escopo
+
+        <script>
+
+            var serie = "The big bang"
+
+            console.log("Global_1: ",serie)
+
+            function escopoFuncao(){
+                var serie2 = "The game of thrones." //escopo de bloco - so usa aqui
+                console.log("Funcao ",serie2)
+            }
+            escopoFuncao();
+
+            if(true){
+                console.log("bloco: ",serie)
+            }
+            {
+                console.log("Global_2: ",serie)
+            }
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <h3>Atualizando escopo</h3>
+        
+
+        <script>
+
+            const SERIE = "The walking dead" // Const não sofre elevaçao
+
+            //console.log("Global: ", SERIE)
+
+            function escopoFuncao() {
+
+                //console.log("Global: ", SERIE)
+
+                if (true) {
+                    if (true) {
+                        const SERIE = "The walking dead"
+                        console.log("bloco dentro da funcao: ", SERIE)
+                    }
+                }
+
+                console.log(" funcao: ", SERIE)
+
+            }
+
+            escopoFuncao();
+
+            {
+                console.log("Global: ", SERIE)
+            }
+
+
+        </script>
+    </body>
+</html>
