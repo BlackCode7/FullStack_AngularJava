@@ -1,15 +1,19 @@
 <html>
     <body>
         <h3>Atualizando escopo</h3>
+        <div id="teste"></div>
         
-
         <script>
 
-           function contarUmaHistoria(personagemCachorro, hobbyCachorro, personagemDono){
+           function contarUmaHistoria(personagemCachorro="Thor", hobbyCachorro="Comer", personagemDono="Tião"){
             return `Era uma vez um cachorro chamado ${personagemCachorro}, ele adorava ${hobbyCachorro}, seu dono chamava-se ${personagemDono}`
            }
-           console.log(contarUmaHistoria("Racha", "Comer", "Martins"));
+           
+           document.getElementById("teste").innerHTML = contarUmaHistoria() // Esse é o modo correto de pegar os elementos html na tela
+
+           console.log(contarUmaHistoria()); // Chamada do método sem parametros
 
         </script>
+
     </body>
 </html>
