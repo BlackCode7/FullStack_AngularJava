@@ -1,0 +1,66 @@
+<html>
+    <body>
+        <h3>Atualizando escopo</h3>
+        
+
+        <script>
+
+            // função normal - função atribuida a variável
+            let multip_0 = function(){
+                return 5*5
+            }
+            multip_0()
+            console.log(multip_0)
+            console.log(multip_0())
+            
+            // Função Arrow Function - função atribuida a variável
+            let multiplicador_1 = () => {
+                return 5*5
+            }
+            console.log(multiplicador_1)
+            console.log(multiplicador_1())
+            
+            // Função Arrow Function - função atribuida a variável
+            let multiplicador_2 = () => {
+                return 5*5
+            }
+            multiplicador_2
+            multiplicador_2()
+            console.log(multiplicador_2)
+            console.log(multiplicador_2())
+
+            // Arrow Function com parâmetros - função atribuida a variável
+            let multiplicador_3 = (a, b) => {
+                return a * b
+            }
+            multiplicador_3
+            multiplicador_3(32, 55)
+            console.log(multiplicador_3)
+            console.log(multiplicador_3(21, 33))
+
+            // Arrow Function mais complexa
+            let parOuImpar = function(n){
+                if((n % 2) === 0){
+                    return "Par";
+                }else{
+                    return "Impar"
+                }
+            }
+            parOuImpar
+            parOuImpar(23)
+            console.log(parOuImpar)
+            console.log(parOuImpar(22))
+
+            // Arrow Function com operador ternário
+            //                      condition   true     false
+            let parOuImpar_1 = n => n%2 === 0 ? "Par" : "Impar"
+            parOuImpar_1
+            parOuImpar_1(213)
+            parOuImpar_1(222)
+            console.log(parOuImpar_1)
+            console.log(parOuImpar_1(3232))
+
+
+        </script>
+    </body>
+</html>
