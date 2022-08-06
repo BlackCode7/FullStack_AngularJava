@@ -1,0 +1,37 @@
+<html>
+    <body>
+        <h3>Atualizando escopo</h3>
+        <div id="teste"></div>
+        
+        <script>
+
+            // Operador Rest Spread usado para espandir
+
+            // Strings
+            let tituloAtivo1 = "Crie aplicações WEB incríveis como Peixe Urbano e Instagram utilizando JavaScript"
+            console.log(tituloAtivo1)
+            console.log(...tituloAtivo1)
+            console.log("RestSpread para arrays",[...tituloAtivo1])
+            console.log("RestSpread para objetos",{...tituloAtivo1})
+            console.log()
+
+            // Pegando arrays em outras variáveis e colocando dentro de outra variável de array
+            let tituloAtivo2 = "Ele gerará a build, testará e fará deploy de sua aplicação automaticamente com base"
+            let tituloAtivo3 = ["Curso python", "CursoDjango"]
+
+            let listaCompletaTitulos = [
+            "Curso Angular", "Curso Laravel",
+            ...tituloAtivo2, ...tituloAtivo3
+            ]
+            console.log("Listas Variadas unificadas com RestSpread >>> ", listaCompletaTitulos)
+
+            // Pegando array de objetos e espandindo dentro de outro objeto com RestSpread
+            let objetopessoa = { nome: "Carlos", idade: 23 }
+            let objetoEndereco = { endereco: "Rua tratratra", cep: "233389-09"}
+            let objetoTotal = { id: 0, ...objetopessoa, ...objetoEndereco}
+            console.log("Usando RestSpread com objetos >>> ",objetoTotal);
+          
+        </script>
+
+    </body>
+</html>
