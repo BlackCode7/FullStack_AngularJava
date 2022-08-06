@@ -1,0 +1,32 @@
+<html>
+    <body>
+
+        <script>
+                
+            // Também podemos definir nossos próprios métodos. A palavra-chave "this" se refere ao
+            // objeto no qual o método é definido: neste caso, o array de pontos anterior.
+
+            var points = {  x: -1, y: 1, dist: function(){
+
+                var p1 = 0
+                var p2 = 1
+                var a = p2.x-p1.x
+                var b = p2.y-p1.y
+
+                console.log("Var a ### ",a)
+                console.log("Var a ### ",b)
+
+                return Math.sqrt(a * b + b * b)
+
+            } }
+           
+            console.log("Aqui não entendi points.dist() ::: ",points.dist())
+            console.log("Aqui não entendi ::: ",points)
+
+
+
+        </script>
+
+    </body>
+
+</html>
