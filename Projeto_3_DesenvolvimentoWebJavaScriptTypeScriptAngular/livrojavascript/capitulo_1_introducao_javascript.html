@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <h3>Atualizando escopo</h3>
+        <div id="teste"></div>
+
+        <h1>{{plus1(22)}}</h1>
+
+        <script>
+
+            // As funções são blocos de código JavaScript parametrizados que podemos chamar.
+            function plus1(x) { // Define uma função chamada "plus1", com o parâmetro "x"
+                return x + 1; // Retorna um valor uma unidade maior do que o que foi passado
+            }
+            plus1(21)
+            console.log("Chamada de função ::: ",plus1(21))
+
+            // As funções são valores e podem ser atribuídas a variáveis
+            let funcaoVariavel = plus1(21)
+            console.log("Resultado função como variável ::: ",funcaoVariavel)
+
+            function square(x){
+                return x * x;
+            }
+            let squareVar = square(32);
+            console.log(squareVar);
+            console.log("Função plus1 dentro de square ::: ",square(plus1(21)))
+
+        </script>
+
+    </body>
+</html>

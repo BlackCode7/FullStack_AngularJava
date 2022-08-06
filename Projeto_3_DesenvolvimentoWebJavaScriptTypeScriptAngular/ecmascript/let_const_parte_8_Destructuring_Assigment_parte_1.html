@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <h3>Atualizando escopo</h3>
+        <div id="teste"></div>
+        
+        <script>
+
+           /*
+                Destructuring assigment contexto de array - Usado para recuperar valores de dentro do array
+           */
+
+            let arrayFrutas = ["Maçã", "Melão", "Abacaxi", "Graviola"];
+            let a = arrayFrutas[1];
+            console.log(a)
+
+            // Operador destructuring é definido por colchetes
+            // o operador entende que cada elemento do array deve ser extraido de acordo com as posições
+            let [ x, y ] = arrayFrutas;
+            console.log("Valores extraidos com Destructuring assigment >>>  ", x, y)
+
+            // Escolhendo elementos de um array
+            let [ a1, b1, , c1] = arrayFrutas;
+            console.log("Escolhendo elementos do array >>> ", a1, b1, c1)
+
+
+        </script>
+
+    </body>
+</html>
