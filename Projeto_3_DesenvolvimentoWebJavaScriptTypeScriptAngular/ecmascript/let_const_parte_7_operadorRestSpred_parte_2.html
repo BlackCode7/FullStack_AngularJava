@@ -1,0 +1,32 @@
+<html>
+    <body>
+        <h3>Atualizando escopo</h3>
+        <div id="teste"></div>
+        
+        <script>
+
+            // Contexto Rest
+            // Guando eu não sei quantos parametros a função vai receber eu posso usar o restspread
+
+            function soma(...variavelDiversa){
+                let result = 0
+
+                // ForEach deve ser usado com uma função de callback
+                variavelDiversa.forEach( v => {
+                    console.log("Dentro do foreach() >>> ",v)
+                    result += v //Jogando o valor do v dentro da variavel result
+                })
+
+                console.log(variavelDiversa)
+
+                return result
+            }
+            let x = soma(4, 5, 32, 34.4, 456.54, 98) //Chamada da função
+          
+            console.log("Soma de todos os valores >>> ",x)
+
+
+        </script>
+
+    </body>
+</html>
