@@ -1,0 +1,24 @@
+<html>
+    <body>
+        <div id="teste"></div>
+        <script>            
+            
+            // Destructuring com operador RestSpread in context array and object 
+
+            //Array
+            let arr = [10, 20, 30, 40, 50, 120]
+            let [a1, t, x1] = arr.map(function (v) {return v.toString(); })
+            let [a, f, ...x] = arr
+
+            console.log(" Com map() :::  ", a1, t, ...x1)
+            console.log(a, f, x)
+
+            // Contexto de objeto
+            let obj = { a:122, f:"Cachorro", c:22.32, d:89.09 }
+            // Tenho que desestruturar o objeto
+            let { a: a11, c:c11, ...rest } = obj
+            console.log(a11, c11, rest )
+            
+        </script>
+    </body>
+</html>
