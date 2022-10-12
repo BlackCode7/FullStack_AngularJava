@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <div id="teste"></div>
+        <script>
+
+            // Class and objects in javascript is equal java
+
+            class Pessoa{
+
+                id;
+                name;
+
+                constructor(id, name){
+                    this.id = id
+                    this.name = name
+                }
+
+                /* Para usar os atributos da classe dentro de um método é necessário usar o this */
+                saudacao(){ console.log(`Ola, meu nome ${this.name} e o id ${this.id}.`) }
+
+            }
+
+            let pessoa = new Pessoa(1, "Anderson");
+            console.log(pessoa.id)
+            console.log(pessoa.name)
+            console.log(pessoa.saudacao())
+
+        </script>
+    </body>
+</html>

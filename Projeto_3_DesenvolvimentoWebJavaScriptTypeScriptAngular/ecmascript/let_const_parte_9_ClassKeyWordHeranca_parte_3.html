@@ -1,0 +1,39 @@
+<html>
+    <body>
+        <div id="teste"></div>
+        <script>
+
+            class Veiculo {
+                id 
+                motor 
+                ignicao 
+                constructor(id, motor, ignicao) {
+                    this.id = id
+                    this.motor = motor
+                    this.ignicao = ignicao
+                }
+                manutencao() {
+                    console.log(`Manutencao do veículo id: ${this.id}, motor: ${this.motor}, ignição: ${this.ignicao}`)
+                }
+            }
+
+            class Carro extends Veiculo {
+                cor
+                constructor(cor) {
+                    super(1, "Susuky", true);
+                    this.cor = "Vermelho" 
+                }
+
+                caracteristicaClassecarro(){
+                    console.log(`Veiculo carro ${this.cor}`)
+                }
+            }
+
+            let carro = new Carro();
+            //console.log("Manutenção veículo: ", carro.manutencao());
+            toGetter = [carro.motor, carro.ignicao, carro.cor]
+            console.log("CarroId:", carro.id, "ToGetter >>> ", ...toGetter);
+
+        </script>
+    </body>
+</html>

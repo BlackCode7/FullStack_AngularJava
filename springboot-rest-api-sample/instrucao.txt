@@ -1,0 +1,13 @@
+novo servidor de banco de dados no postgresql
+
+host name > BlackCode
+Port > 5434
+maintenance database > blackcode
+username > blackcode
+password > blackcode
+
+entrando na pasta
+cd E:\Projetos_Programacao\FullStack_AngularJava\springboot-rest-api-sample\target>
+
+Para gerar um arquivo jar para deploy
+java -jar springboot-rest-api-sample-1.0.0-SNAPSHOT.jar

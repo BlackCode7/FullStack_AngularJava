@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <div id="teste"></div>
+        <script>
+
+            class AnimalDomestico{
+                nome
+                tipo
+                habito
+
+                constructor(nome,tipo,habito){
+                    this.nome = nome
+                    this.tipo = tipo
+                    this.habito = habito
+                }
+            }
+
+            class Cachorro extends AnimalDomestico{
+                alimentacao
+                constructor( alimentacao ){
+                    super("Xupita","Canina","Noturna")
+                    this.alimentacao = alimentacao
+                }
+                habitoCachorro(){
+                    console.log(` Animal Cachorro: ${this.nome}, ${this.tipo}, ${this.habito}, ${this.alimentacao}`);
+                }
+            }
+
+            //let animalDomestico = new AnimalDomestico("Luly", "Canino", "Diurno");
+
+            let animalCacho = new Cachorro("Ração");            
+            console.log(` ${animalCacho.habitoCachorro()} `)
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+    <body>
+        <div id="teste"></div>
+        <script>
+
+            // Class and objects in javascript is equal java
+            class Pessoa {
+                id;
+                name;
+                constructor(id, name) {
+                    this.id = id
+                    this.name = name
+                }
+                /* Para usar os atributos da classe dentro de um método é necessário usar o this */
+                saudacao() {
+                    console.log(`Ola, meu nome ${ this.name } e o id ${this.id}.`)
+                }
+            }
+
+
+            /* HERANÇA */
+            class Aluno extends Pessoa {
+                constructor() { /* Neste caso nos temos a classe filha passando parametros para a classe pai - dinamicamente */
+                    super("Anderson", 21); // é necessário usar o método super() na classe filha para ligar ela com a classe pai
+                    this.notas = { t1: 7, t2: 8, p1: 6, p2: 9}
+                }
+
+                mediaFinalPonderada() {
+                    let m = this.notas.t1 * 2;
+                    // Usando a mesma variável para atribuir os outros valores da média
+                    m += this.notas.t2 * 2;
+                    m += this.notas.p1 * 3;
+                    m += this.notas.p2 * 3;
+                    m = m / 10;
+                    return m;
+                }
+
+            }
+
+            let aluno = new Aluno();
+            console.log("Aluno :  ", aluno.mediaFinalPonderada());
+            aluno.saudacao();
+            
+        </script>
+    </body>
+</html>
