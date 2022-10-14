@@ -43,10 +43,10 @@ class EmailjavaMavenApplicationTests {
 			
 			// Configura as credenciais do meu email
 			Session session = Session.getInstance(properties, new javax.mail.Authenticator() {				
-				@Override
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(userName, senha);
-				}
+				//@Override
+				//protected PasswordAuthentication getPasswordAuthentication() {
+				//	return new PasswordAuthentication(userName, senha);
+				//}
 				
 			});
 			
@@ -61,6 +61,7 @@ class EmailjavaMavenApplicationTests {
 			
 			javax.mail.Transport.send(message);
 			
+			/* Teste do SOURCETREE */
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
