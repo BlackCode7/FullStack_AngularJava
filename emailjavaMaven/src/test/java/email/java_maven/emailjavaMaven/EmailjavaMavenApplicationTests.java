@@ -61,7 +61,7 @@ class EmailjavaMavenApplicationTests {
 			
 			javax.mail.Transport.send(message);
 			
-			/* Teste do SOURCETREE */
+			/* Teste do SOURCETREE _ Estudos do Java*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
