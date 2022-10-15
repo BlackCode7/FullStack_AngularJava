@@ -34,16 +34,13 @@ class EmailjavaMavenApplicationTests {
 		
 		
 		stringBuilderTextoEmail.append("<a target=\"blank\" href=\"https://github.com/BlackCode7/FullStack_AngularJava/blob/main/README.md\"> Acesse o meu repositório ! </a>");
-
-		
 		
 		ObjetoEnviaEmail enviaEmail = 
 				new ObjetoEnviaEmail("criacaoemaildetestecomjava@gmail.com", 
-															"Anderson Martins",
-															"Título do envio de email", 
-															
-															stringBuilderTextoEmail.toString());
-		
+									"Anderson Martins",
+									"Título do envio de email", 									
+									stringBuilderTextoEmail.toString());
+	
 		enviaEmail.enviarEmail(true);
 		
 		
