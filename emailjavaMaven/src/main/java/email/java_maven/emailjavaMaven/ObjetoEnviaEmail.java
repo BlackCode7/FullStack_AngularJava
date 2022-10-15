@@ -19,6 +19,8 @@ public class ObjetoEnviaEmail {
 	private String assuntoEmail = "";
 	private String textoEmail = "";
 	
+	Session session;
+	
 	public ObjetoEnviaEmail( String listaDestinatarios, String nomeRemetente,
 			String assuntoEmail, String textoEmail) {
 		
@@ -28,7 +30,7 @@ public class ObjetoEnviaEmail {
 		this.textoEmail = textoEmail;
 	}
 	
-	public void enviarEmail() throws Exception {
+	public void enviarEmail( boolean envioHTML ) throws Exception {
 
 		/* Configuração das propriedades */
 		Properties properties = new Properties();
@@ -43,11 +45,11 @@ public class ObjetoEnviaEmail {
 																							// smtp
 
 		// Configura as credenciais do meu email
-		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(userName, senha);
-			}
+		session = Session.getInstance(properties, new javax.mail.Authenticator() {
+			//@Override
+			//protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				//return PasswordAuthentication(userName, senha);
+			//}
 
 		});
 
@@ -58,10 +60,19 @@ public class ObjetoEnviaEmail {
 		message.setFrom(new InternetAddress(userName, nomeRemetente));// quem esta enviando
 		message.setRecipients(Message.RecipientType.TO, toUser);
 		message.setSubject(assuntoEmail);
-		message.setText(textoEmail);
+		
+		if( envioHTML ) {//Verifica se tem tags html, se tiver ele manda mensagem formatada em html
+			message.setContent(textoEmail, "text/html; charset=utf-8"); 
+		}
+		else {//Se não tiver html no corpo da mensagem ele não envia mensagem formatada em html
+			message.setText(textoEmail);
+		}
+		
 
 		javax.mail.Transport.send(message);
 
 	}
+
+	
 
 }
