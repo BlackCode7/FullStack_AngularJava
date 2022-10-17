@@ -8,3 +8,16 @@
 https://maplink.global/blog/como-rastrear-veiculo-google-maps/
 
 ----------- PROJETO USANDO API DO GOOGLE PARA RASTREAMENTO -------------------
+
+Documentação de Referências para programadores do google
+https://developers.google.com/maps/documentation/javascript/reference
+
+Projeto Demonstração do google
+https://developers.google.com/maps/documentation/javascript/overview#maps_map_simple-html
+
+Algoritmo - Referências
+https://www.geeksforgeeks.org/project-idea-real-time-vehicle-tracking/
+
+Blogs de Referências
+https://circuitdigest.com/microcontroller-projects/vehicle-tracking-system-using-arduino-gps-and-gsm
+https://www.filipeflop.com/blog/faca-seu-rastreador-veicular-com-esp32-gps-e-freertos/
