@@ -102,7 +102,6 @@ INDEX VERSION 1.131+E:\Projetos_Programacao\FullStack_AngularJava\.metadata\.plu
 954734081.index
 859831514.index
 3490287349.index
-3647742976.index
 3013733458.index
 338132802.index
 3315950019.index
