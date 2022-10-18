@@ -1,0 +1,8 @@
+package com.posjavajdbc.posjavajdbc.conexaojdbc;
+
+public class SingleConnection {
+	
+	private static String banco  = "";
+	private static string password = "";
+
+}

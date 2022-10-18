@@ -1,0 +1,91 @@
+package TelaTimeThread;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class TelaTimeThread extends JDialog {
+	
+	//Painel de componentes 1
+	private JPanel jPanel = new JPanel( new GridBagLayout()); 
+	// Criando a label 2
+	private JLabel descricaoHora = new JLabel( "Time Thread 1" );
+	// CRiando campo de texto - 7
+	private JTextField mostraTempo = new JTextField();
+	
+	private JLabel descricaoHora2 = new JLabel( "Time Thread 2" );
+	// CRiando campo de texto - 7
+	private JTextField mostraTempo2 = new JTextField();
+	
+	private JButton jButtonStart = new JButton("Start");
+	private JButton jButtonFinal = new JButton("Final");
+		  
+	
+	TelaTimeThread(){
+		setTitle("Titulo da tela de contagem de tempo");
+		setSize(350, 300);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		
+		// formador de telas - controlando o poisicioanmento - 3
+		GridBagConstraints gridBagConstraints = new GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.insets = new Insets(5,10,5,5);
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		
+		// adicionando paineis no swing - 4
+		descricaoHora.setPreferredSize( new Dimension(200, 24) );
+		// Posicioanado o  campo   na  grade - 5
+		jPanel.add(descricaoHora, gridBagConstraints);
+		//Posicionando o layout a esquerda da tela - 6
+		add(jPanel, BorderLayout.WEST);		
+		//Repetindo processo 4,5,6
+		mostraTempo.setPreferredSize( new Dimension(200, 24) );
+		// Andando para a segunda posição na coluna y comgridBagConstraints ++ - 8
+		gridBagConstraints.gridy ++;
+		jPanel.add(mostraTempo, gridBagConstraints);
+		
+		//***************************************************
+		
+		// adicionando paineis no swing - 4
+		descricaoHora2.setPreferredSize( new Dimension(200, 24) );
+		// Andando para a segunda posição na coluna y comgridBagConstraints ++ - 8
+		gridBagConstraints.gridy ++;
+		// Posicioanado o  campo   na  grade - 5
+		jPanel.add(descricaoHora2, gridBagConstraints);
+		//Posicionando o layout a esquerda da tela - 6
+		add(jPanel, BorderLayout.WEST);		
+		//Repetindo processo 4,5,6
+		mostraTempo2.setPreferredSize( new Dimension(200, 24) );
+		// Andando para a segunda posição na coluna y comgridBagConstraints ++ - 8
+		gridBagConstraints.gridy ++;
+		jPanel.add(mostraTempo2, gridBagConstraints);
+
+		//****************************************************
+		
+		gridBagConstraints.gridwidth = 1;
+		
+		//jButtonStart //jButtonFinal
+		jButtonStart.setPreferredSize( new Dimension( 92, 25 ));
+		gridBagConstraints.gridy ++;
+		jPanel.add(jButtonStart, gridBagConstraints);
+		
+		jButtonFinal.setPreferredSize( new Dimension( 92, 25));
+		gridBagConstraints.gridx ++;
+		jPanel.add(jButtonFinal, gridBagConstraints);
+		
+		
+		setVisible(true);
+	};
+
+}

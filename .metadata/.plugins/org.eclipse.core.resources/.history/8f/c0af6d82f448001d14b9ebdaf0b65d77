@@ -1,0 +1,28 @@
+package Modulo_15_DatasTempoPeriodoAPI_DateTime;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class DatasEmJava {
+
+	public static void main(String[] args) {
+
+		// Formatando a Data
+		SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy");
+		
+		// Pegando a data de hoje
+		Date dataVencimento = 
+		
+		
+		
+		/*
+		 * Date data =  new Date();		
+		System.out.println(data.getDate() + " > Dia do mes");
+		System.out.println(data.getTime() + " > milisegundos da data");
+		System.out.println(data.getHours() + " > Hora do dia");
+		System.out.println(data.getMinutes() + " > Minutos do dia");
+		 * */
+
+	}
+
+}

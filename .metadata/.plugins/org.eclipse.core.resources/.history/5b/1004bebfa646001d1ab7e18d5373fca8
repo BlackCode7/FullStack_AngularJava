@@ -1,0 +1,14 @@
+package commissionEmployee_execusao;
+
+import commissionEmployee.CommissionEmployee;
+
+public class CommissionEmployee_Execusao {
+
+	public static void main(String[] args) throws IllegalAccessException {
+
+		CommissionEmployee employee = new CommissionEmployee("Anderson",
+											"Jones", "55-55-5555", 10000, 0.08);
+		
+	}
+
+}

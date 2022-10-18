@@ -1,0 +1,12 @@
+package com.posjavajdbc.posjavajdbc;
+
+import com.posjavajdbc.posjavajdbc.conexaojdbc.SingleConnection;
+
+public class TesteBancoJdbc {
+	
+	public void initBanco() {
+		
+		SingleConnection.getConnection();
+	}
+
+}

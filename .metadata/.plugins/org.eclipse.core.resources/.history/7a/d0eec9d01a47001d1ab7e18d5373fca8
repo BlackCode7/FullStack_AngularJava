@@ -1,0 +1,7 @@
+package TelaTimeThread;
+
+public class TelaTimeThread {
+	
+	setVisible();
+
+}

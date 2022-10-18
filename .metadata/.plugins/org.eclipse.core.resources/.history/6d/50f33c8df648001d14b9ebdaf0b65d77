@@ -1,0 +1,50 @@
+package Modulo_15_DatasTempoPeriodoAPI_DateTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class DatasEmJava {
+
+	public static void main(String[] args) throws ParseException {
+
+		// CALCULANDO DIA MÊS E ANO COM CALENDAR
+		Calendar calendar = Calendar.getInstance(); // pega data atual
+		
+		// simular que data vem de outro lugar
+		calendar.setTime(new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2022")); // definindo data qualquer
+		
+		
+		
+		
+		/*
+		 * // Formatando a Data
+		SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy");
+		
+		// Pegando a data de hoje
+		Date dataVencimento = simpleDate.parse("15/10/2022");
+		Date dataAtual = simpleDate.parse("17/10/2022");
+		
+		// Comparando as datas de hoje
+		// perguntando se o boleto esta vencido comparando com a data de hoje - o after() / before() faz isso
+		if( dataVencimento.after(dataAtual) ) {
+			System.out.println( "Boleto não vencido !" );
+		} else {
+			System.out.println(" Boleto vencido - PAGAR URGENTE ");
+		}
+		 * 
+		 * */
+		
+		
+		
+		/*
+		 * Date data =  new Date();		
+		System.out.println(data.getDate() + " > Dia do mes");
+		System.out.println(data.getTime() + " > milisegundos da data");
+		System.out.println(data.getHours() + " > Hora do dia");
+		System.out.println(data.getMinutes() + " > Minutos do dia");
+		 * */
+
+	}
+
+}

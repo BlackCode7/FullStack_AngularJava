@@ -1,0 +1,80 @@
+package ThreadsJava;
+
+import javax.swing.JOptionPane;
+
+public class ExemploDeThreadsJAVA {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		// TRHEAD CONCORRENTE - 1
+		new Thread() {			
+			/* Chama o run() onde vfai ficar o código da rotina de thread */
+			public void run(){
+				/* Código da rotina para executar em paralelo */
+				for( int pos =0; pos < 10; pos++ ) {						
+					//Isso aqui é a thread do java
+					try {
+						Thread.sleep(6000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}			
+					/* executar o envio com tempo de parada */
+					System.out.println("Executando rotina, envio de email!");						
+				}
+			};	
+		}.start();// A start é que liga a thread e deixa ela trabalhando por trás
+		
+		/******************** DIVISÃO DE THREADS *********************************/
+		
+		// TRHEAD CONCORRENTE - 2
+		new Thread() {	
+			public void run(){
+				for( int pos =0; pos < 10; pos++ ) {	
+					try {
+						Thread.sleep(6000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}			
+					System.out.println("Executando rotina, envio de Nota fiscal!");						
+				}
+			};	
+		}.start();
+		
+		
+		/* código que continua rodando por trás */
+		System.out.println(" Fim da execução do código! ");
+		/* Aqui pode ser o programa rodando para o usuario */
+		JOptionPane.showMessageDialog(null, "Sistema em execução para o usuário");
+	}
+	
+	private static Runnable thread1 = new Runnable() {
+
+		@Override
+		public void run() {
+			
+			
+			
+		}
+		
+	};
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

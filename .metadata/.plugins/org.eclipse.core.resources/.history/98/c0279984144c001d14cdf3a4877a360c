@@ -1,0 +1,12 @@
+package com.emailsender.emailsender.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.emailsender.emailsender.service.EmailSenderService;
+
+@Service
+public class EmailSenderServiceIMPL implements EmailSenderService{
+
+	
+	
+}

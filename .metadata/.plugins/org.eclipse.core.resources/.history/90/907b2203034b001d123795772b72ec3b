@@ -1,0 +1,22 @@
+package SomandoElementosDeUmArray;
+
+public class SomandoElementosDeUmArray {
+
+	public static void main(String[] args) {
+
+		somandoElementosDeUmArray();
+
+	}
+
+	public static void somandoElementosDeUmArray() {
+		int[] array = { 87, 68, 94, 100, 83, 78, 85, 91, 76, 87 };
+		int total = 0;
+		
+		for ( int counter = 0; counter < array.length; counter++ ) {
+			total += array[counter];
+		}
+		
+		System.out.printf("Total o valor de cada elemento %d%n", total);
+	}
+
+}

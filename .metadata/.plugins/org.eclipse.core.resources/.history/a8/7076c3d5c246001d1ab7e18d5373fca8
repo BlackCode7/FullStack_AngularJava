@@ -1,0 +1,23 @@
+package SplitArray;
+
+public class SplitArray {
+
+	public static void main(String[] args) {
+
+		// como destrinchar strings 
+		String texto = " Anderson, curso java, 80, 70, 60, 50 ";
+		
+		String[] valorArray = texto.split(",");
+		
+		System.out.println(valorArray[0]);
+		System.out.println(valorArray[1]);
+		System.out.println(valorArray[2]);
+		System.out.println(valorArray[3]);
+
+		//Convertendo lista para Array
+		
+		
+		
+	}
+
+}

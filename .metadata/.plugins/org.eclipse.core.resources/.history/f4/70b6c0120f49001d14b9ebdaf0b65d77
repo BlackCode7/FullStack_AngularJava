@@ -1,0 +1,77 @@
+package Modulo_15_DatasTempoPeriodoAPI_DateTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
+
+public class DatasEmJava {
+
+	public static void main(String[] args) throws ParseException {
+
+		// CALCULANDO A QUANTIDADE DE DIAS ENTRE UM PERIODO DE DATAS  com ChronoUnit
+		//Date dataPassada = new SimpleDateFormat("dd-MM-yyyy").parse();
+		
+		long dias = ChronoUnit.DAYS.between(LocalDate.parse("2022-10-01"), LocalDate.now());
+		long dias1 = ChronoUnit.CENTURIES.between(LocalDate.parse("2022-10-01"), LocalDate.now());
+		
+		long mes = ChronoUnit.MONTHS.between(LocalDate.parse("2022-10-01"), LocalDate.now());
+		
+		long ano = ChronoUnit.YEARS.between(LocalDate.parse("2022-10-01"), LocalDate.now());
+		
+		System.out.println(dias);
+		
+		
+		
+		
+		/*
+		 * // CALCULANDO DIA MÊS E ANO COM CALENDAR
+		Calendar calendar = Calendar.getInstance(); // pega data atual
+		
+		// simular que data vem de outro lugar
+		calendar.setTime(new SimpleDateFormat("dd-MM-yyyy").parse("10-10-2022")); // definindo data qualquer
+		
+		calendar.add(Calendar.DAY_OF_MONTH, 10);// Acrescenta 10 dias a data atual
+		System.out.println( new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()));
+		
+		calendar.add(Calendar.MONTH, 10);// Acrescenta 10 meses ao mes atual
+		System.out.println( new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()));
+		
+		calendar.add(Calendar.YEAR, 10);// Acrescenta 10 anos ao ano atual
+		System.out.println( new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()));
+		 * */
+		
+		
+		/*
+		 * // Formatando a Data
+		SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy");
+		
+		// Pegando a data de hoje
+		Date dataVencimento = simpleDate.parse("15/10/2022");
+		Date dataAtual = simpleDate.parse("17/10/2022");
+		
+		// Comparando as datas de hoje
+		// perguntando se o boleto esta vencido comparando com a data de hoje - o after() / before() faz isso
+		if( dataVencimento.after(dataAtual) ) {
+			System.out.println( "Boleto não vencido !" );
+		} else {
+			System.out.println(" Boleto vencido - PAGAR URGENTE ");
+		}
+		 * 
+		 * */
+		
+		
+		
+		/*
+		 * Date data =  new Date();		
+		System.out.println(data.getDate() + " > Dia do mes");
+		System.out.println(data.getTime() + " > milisegundos da data");
+		System.out.println(data.getHours() + " > Hora do dia");
+		System.out.println(data.getMinutes() + " > Minutos do dia");
+		 * */
+
+	}
+
+}

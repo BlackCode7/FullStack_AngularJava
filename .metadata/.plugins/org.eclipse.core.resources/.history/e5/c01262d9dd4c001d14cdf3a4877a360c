@@ -1,0 +1,23 @@
+package com.posjavajdbc.posjavajdbc.userPosDAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import com.posjavajdbc.posjavajdbc.conexaojdbc.SingleConnection;
+import com.posjavajdbc.posjavajdbc.model.UserPosJava;
+
+public class UserPosDAO {
+	
+	private Connection connection;
+	
+	public UserPosDAO() {
+		connection = SingleConnection.getConnection();
+	}
+
+	public void salvar( UserPosJava userposjava ) {
+		
+		String sql = "insert into userposjava(id, nome, email) values (?,?,?)";
+		PreparedStatement insert = connection.prepareStatement(sql);
+	}
+	
+}

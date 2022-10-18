@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>sistema-relacionamento</groupId>
+	<artifactId>motor-web-sb</artifactId>
+	<version>1.0.0</version>
+	<packaging>war</packaging>
+
+	<name>sr-motor-web-sb</name>
+	<description>Módulo Spring Boot Web do Sistema de Relacionamento</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.10.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<working.directory.ng8>../sr-motor-ng-8</working.directory.ng8>
+		<working.directory.web.sb>../sr-motor-web-sb</working.directory.web.sb>
+		<executable.npm>npm.cmd</executable.npm>
+	</properties>
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>sistema-relacionamento</groupId>
+			<artifactId>sr-motor-lib</artifactId>
+			<version>4.18.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>sistema-atendimento</groupId>
+			<artifactId>atendimento-commons</artifactId>
+			<version>2.0.2.33</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.3.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-to-slf4j</artifactId>
+			<version>2.8.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>prod</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<!-- Required: The following will ensure `npm install` is called before
+								anything else during the 'Default Lifecycle' -->
+							<execution>
+								<id>npm install (initialize)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>initialize</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>npm</executable>
+									<arguments>
+										<argument>install</argument>
+									</arguments>
+								</configuration>
+							</execution>
+
+							<!-- Required: The following will ensure `npm install` is called before
+								anything else during the 'Clean Lifecycle' -->
+							<execution>
+								<id>npm install (clean)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>pre-clean</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>npm</executable>
+									<arguments>
+										<argument>install</argument>
+									</arguments>
+								</configuration>
+							</execution>
+
+							<!-- Optional: The following will output the npm configuration. I
+								do this so my CI logs will show the npm information used for the build -->
+							<execution>
+								<id>npm config list (validate)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>validate</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>npm</executable>
+									<arguments>
+										<argument>config</argument>
+										<argument>ls</argument>
+										<argument>-l</argument>
+									</arguments>
+								</configuration>
+							</execution>
+
+							<!-- Required: This following calls `npm run build` where 'build'
+								is the script name I used in my project, change this if yours is different -->
+							<execution>
+								<id>ng build (compile)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>compile</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>ng</executable>
+									<arguments>
+										<argument>build</argument>
+										<argument>--output-path</argument>
+										<argument>../sr-motor-web-sb/src/main/webapp/ng/dist</argument>
+										<argument>--base-href=/motor-web/ng/dist/</argument>
+										<argument>--configuration=production</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-maven-plugin</artifactId>
+						<version>1.0.2.Final</version>
+						<configuration>
+							<domain>
+								<server-groups>
+									<server-group>${wildfly-server-group}</server-group>
+								</server-groups>
+							</domain>
+						</configuration>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.codehaus.mojo
+												</groupId>
+												<artifactId>
+													exec-maven-plugin
+												</artifactId>
+												<versionRange>
+													[1.5.0,)
+												</versionRange>
+												<goals>
+													<goal>exec</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+
+		<profile>
+			<id>localSemAngular</id>
+
+			<repositories>
+				<repository>
+					<id>nexus-local</id>
+					<name>Archiva</name>
+					<url>http://nexus.des.sp.gov.br/repository/maven-si-hosted/</url>
+				</repository>
+			</repositories>
+
+			<build>
+				<plugins>
+
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-maven-plugin</artifactId>
+						<version>1.0.2.Final</version>
+						<configuration>
+							<domain>
+								<server-groups>
+									<server-group>main-server-group</server-group>
+								</server-groups>
+							</domain>
+						</configuration>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.codehaus.mojo
+												</groupId>
+												<artifactId>
+													exec-maven-plugin
+												</artifactId>
+												<versionRange>
+													[1.5.0,)
+												</versionRange>
+												<goals>
+													<goal>exec</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+
+			<pluginRepositories>
+				<pluginRepository>
+					<id>nexus-local</id>
+					<name>Archiva</name>
+					<url>http://nexus.des.sp.gov.br/repository/maven-si-hosted/</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+		
+		<profile>
+			<id>casaComAngular</id>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+
+							<!-- Required: This following calls `npm run build` where 'build'
+								is the script name I used in my project, change this if yours is different -->
+							<execution>
+								<id>ng build (compile)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>compile</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>ng.cmd</executable>
+									<arguments>
+										<argument>build</argument>
+										<argument>--output-path</argument>
+										<argument>../sr-motor-web-sb/src/main/webapp/ng/dist</argument>
+										<argument>--base-href=/motor-web/ng/dist/</argument>
+										<argument>--configuration=casa</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.codehaus.mojo
+												</groupId>
+												<artifactId>
+													exec-maven-plugin
+												</artifactId>
+												<versionRange>
+													[1.5.0,)
+												</versionRange>
+												<goals>
+													<goal>exec</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>localComAngular</id>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+
+							<!-- Required: This following calls `npm run build` where 'build'
+								is the script name I used in my project, change this if yours is different -->
+							<execution>
+								<id>ng build (compile)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>compile</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>ng.cmd</executable>
+									<arguments>
+										<argument>build</argument>
+										<argument>--output-path</argument>
+										<argument>../sr-motor-web-sb/src/main/webapp/ng/dist</argument>
+										<argument>--base-href=/motor-web/ng/dist/</argument>
+										<argument>--configuration=production</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.codehaus.mojo
+												</groupId>
+												<artifactId>
+													exec-maven-plugin
+												</artifactId>
+												<versionRange>
+													[1.5.0,)
+												</versionRange>
+												<goals>
+													<goal>exec</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+
+		<profile>
+			<id>homolog</id>
+
+			<repositories>
+				<repository>
+					<id>nexus-local</id>
+					<name>Archiva</name>
+					<url>http://nexus.des.sp.gov.br/repository/maven-si-hosted/</url>
+				</repository>
+			</repositories>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<!-- Required: The following will ensure `npm install` is called before
+								anything else during the 'Default Lifecycle' -->
+							<execution>
+								<id>npm install (initialize)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>initialize</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>npm</executable>
+									<arguments>
+										<argument>install</argument>
+									</arguments>
+								</configuration>
+							</execution>
+
+							<!-- Required: The following will ensure `npm install` is called before
+								anything else during the 'Clean Lifecycle' -->
+							<execution>
+								<id>npm install (clean)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>pre-clean</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>npm</executable>
+									<arguments>
+										<argument>install</argument>
+									</arguments>
+								</configuration>
+							</execution>
+
+							<!-- Optional: The following will output the npm configuration. I
+								do this so my CI logs will show the npm information used for the build -->
+							<execution>
+								<id>npm config list (validate)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>validate</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>npm</executable>
+									<arguments>
+										<argument>config</argument>
+										<argument>ls</argument>
+										<argument>-l</argument>
+									</arguments>
+								</configuration>
+							</execution>
+
+							<!-- Required: This following calls `npm run build` where 'build'
+								is the script name I used in my project, change this if yours is different -->
+							<execution>
+								<id>ng build (compile)</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>compile</phase>
+								<configuration>
+									<workingDirectory>${working.directory.ng8}</workingDirectory>
+									<executable>ng</executable>
+									<arguments>
+										<argument>build</argument>
+										<argument>--output-path</argument>
+										<argument>../sr-motor-web-sb/src/main/webapp/ng/dist</argument>
+										<argument>--base-href=/motor-web/ng/dist/</argument>
+										<argument>--configuration=production</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-maven-plugin</artifactId>
+						<version>1.0.2.Final</version>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.codehaus.mojo
+												</groupId>
+												<artifactId>
+													exec-maven-plugin
+												</artifactId>
+												<versionRange>
+													[1.5.0,)
+												</versionRange>
+												<goals>
+													<goal>exec</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>nexus-local</id>
+					<name>Archiva</name>
+					<url>http://nexus.des.sp.gov.br/repository/maven-si-hosted/</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+		<profile>
+			<id>localhost</id>
+
+			<repositories>
+				<repository>
+					<id>nexus-local</id>
+					<name>Archiva</name>
+					<url>http://nexus.des.sp.gov.br/repository/maven-si-hosted/</url>
+				</repository>
+			</repositories>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-maven-plugin</artifactId>
+						<version>1.0.2.Final</version>
+						<configuration>
+							<domain>
+								<server-groups>
+									<server-group>main-server-group</server-group>
+								</server-groups>
+							</domain>
+						</configuration>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.codehaus.mojo
+												</groupId>
+												<artifactId>
+													exec-maven-plugin
+												</artifactId>
+												<versionRange>
+													[1.5.0,)
+												</versionRange>
+												<goals>
+													<goal>exec</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+
+			<pluginRepositories>
+				<pluginRepository>
+					<id>nexus-local</id>
+					<name>Archiva</name>
+					<url>http://nexus.des.sp.gov.br/repository/maven-si-hosted/</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+</project>

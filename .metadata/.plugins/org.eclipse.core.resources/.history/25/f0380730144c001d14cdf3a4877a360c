@@ -1,0 +1,10 @@
+package com.emailsender.emailsender.service;
+
+public interface EmailSenderService {
+	
+	void sendEmail(  ) {
+		
+	}
+	
+
+}

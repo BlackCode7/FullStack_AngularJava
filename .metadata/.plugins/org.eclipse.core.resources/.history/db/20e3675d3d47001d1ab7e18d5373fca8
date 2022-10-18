@@ -1,0 +1,50 @@
+package TelaTimeThread;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class TelaTimeThread extends JDialog {
+	
+	//Painel de componentes 1
+	private JPanel jPanel = new JPanel( new GridBagLayout()); 
+	// Criando a label 2
+	private JLabel descricaoHora = new JLabel( " Time Thread 1 " );
+	// CRiando campo de texto - 7
+	private JTextField mostraTempo = new JTextField();
+	
+	TelaTimeThread(){
+		setTitle("Titulo da tela de contagem de tempo");
+		setSize(400, 300);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		
+		// formador de telas - controlando o poisicioanmento - 3
+		GridBagConstraints gridBagConstraints = new GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		
+		// adicionando paineis no swing - 4
+		descricaoHora.setPreferredSize( new Dimension(200, 24) );
+		// Posicioanado o  campo   na  grade - 5
+		jPanel.add(descricaoHora, gridBagConstraints);
+		//Posicionando o layout a esquerda da tela - 6
+		add(jPanel, BorderLayout.WEST);
+		
+		//Repetindo processo 4,5,6
+		mostraTempo.setPreferredSize( new Dimension(200, 24) );
+		gridBagConstraints.gridx = 1;
+		jPanel.add(mostraTempo, gridBagConstraints);
+		
+		
+		
+		setVisible(true);
+	};
+
+}

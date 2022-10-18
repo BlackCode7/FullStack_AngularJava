@@ -1,0 +1,12 @@
+package TelaTimeThread;
+
+public class Execucao_TelaTimeThread {
+
+	public static void main(String[] args) {
+
+		TelaTimeThread telaTimeThread = new TelaTimeThread();
+		setTitle();
+
+	}
+
+}

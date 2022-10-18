@@ -1,0 +1,8 @@
+package commissionEmployee;
+
+public class CommissionEmployee  extends Object{
+
+	private final String firstName;
+	
+	
+}

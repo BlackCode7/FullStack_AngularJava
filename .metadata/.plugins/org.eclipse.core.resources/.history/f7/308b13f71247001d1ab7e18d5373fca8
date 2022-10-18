@@ -1,0 +1,27 @@
+package ThreadsJava;
+
+import javax.swing.JOptionPane;
+
+public class ExemploDeThreadsJAVA {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		new Thread() {
+			
+		};
+		/* Código da rotina para executar em paralelo */
+		for( int pos =0; pos < 10; pos++ ) {						
+			//Isso aqui é a thread do java
+			Thread.sleep(6000);			
+			/* executar o envio com tempo de parada */
+			System.out.println("Executando rotina, envio de email!");						
+		}
+		
+		
+		/* código que continua rodando por trás */
+		System.out.println(" Fim da execução do código! ");
+		/* Aqui pode ser o programa rodando para o usuario */
+		JOptionPane.showMessageDialog(null, "Sistema em execução para o usuário");
+	}
+	
+}

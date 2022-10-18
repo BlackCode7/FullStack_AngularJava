@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 8 resources" deleteContents="true" description="Delete 8 resources" element1="/enviando-mail-bar" element2="/enviando-mail-classloader" element3="/enviando-mail-flow" element4="/enviando-mail-java" element5="/enviando-mail-mset" element6="/enviando-mail-parent" element7="/enviando-mail-subflow" element8="/enviando-mail-uebergabe" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="8" stamp="1665602094869"/>
+</session>

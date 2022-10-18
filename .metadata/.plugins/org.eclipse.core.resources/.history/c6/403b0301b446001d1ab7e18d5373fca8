@@ -1,0 +1,17 @@
+package Matrizes;
+
+public class Matrizes {
+
+	public static void main(String[] args) {
+	
+		/* Aqui é um array */
+		int notasArray[] = new int[1];
+		
+		/* Aqui é uma matriz */
+		int notas[][] = new int[1][3];
+		
+		notas[0][0] = 80;
+		
+	}
+	
+}

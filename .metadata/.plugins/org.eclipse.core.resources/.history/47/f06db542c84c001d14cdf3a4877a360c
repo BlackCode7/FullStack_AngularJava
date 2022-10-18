@@ -1,0 +1,7 @@
+package com.posjavajdbc.posjavajdbc.conexaojdbc;
+
+public class SingleConnection {
+	
+	
+
+}

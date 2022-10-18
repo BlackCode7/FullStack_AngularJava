@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="springboot-elasticsearch-java-angular-backend-application"/>
+<aop-project name="emailjavaMaven"/>
+<aop-project name="springboot-rest-api-sample"/>
+<aop-project name="motor-web-sb"/>
+</aop-reference-model>

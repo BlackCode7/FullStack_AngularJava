@@ -1,0 +1,8 @@
+
+# Config do servidor de E-mail
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mailusername=${EMAIL}
+spring.mail.password=${PASSWORD}
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true

@@ -1,0 +1,14 @@
+package TelaTimeThread;
+
+import javax.swing.JDialog;
+
+public class TelaTimeThread extends JDialog {
+	
+	TelaTimeThread(){
+		
+		
+		
+		setVisible(true);
+	};
+
+}

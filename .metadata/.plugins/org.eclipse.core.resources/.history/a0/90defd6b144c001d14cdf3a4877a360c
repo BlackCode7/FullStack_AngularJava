@@ -1,0 +1,5 @@
+package com.emailsender.emailsender.service.impl;
+
+public class EmailSenderServiceIMPL {
+
+}

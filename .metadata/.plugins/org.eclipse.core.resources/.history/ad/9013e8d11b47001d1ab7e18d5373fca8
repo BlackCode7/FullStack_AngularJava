@@ -1,0 +1,16 @@
+package TelaTimeThread;
+
+import javax.swing.JDialog;
+
+public class TelaTimeThread extends JDialog {
+	
+	TelaTimeThread(){
+		setTitle("Titulo da tela de contagem de tempo");
+		setSize(300, 400);
+		set
+		
+		
+		setVisible(true);
+	};
+
+}

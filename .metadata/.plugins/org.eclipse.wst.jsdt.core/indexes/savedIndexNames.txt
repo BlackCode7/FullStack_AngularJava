@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+E:\Projetos_Programacao\FullStack_AngularJava\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1495555511.index
+2465843175.index
+2484299528.index
+566083245.index
+2085348581.index
+296934364.index

@@ -1,0 +1,11 @@
+package TelaTimeThread;
+
+public class Execucao_TelaThread_2_FILa {
+
+	public static void main(String[] args) {
+		// TelaThread_2_FILa
+		TelaThread_2_FILa telaThread_2_FILa = new TelaThread_2_FILa();
+
+	}
+
+}

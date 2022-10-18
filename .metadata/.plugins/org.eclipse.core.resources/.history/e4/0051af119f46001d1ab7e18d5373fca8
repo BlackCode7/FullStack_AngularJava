@@ -1,0 +1,23 @@
+package commissionEmployee;
+
+public class CommissionEmployee  extends Object{
+
+	private final String firstName = "";
+	private final String lastName = "";
+	private final String socialSecurityNumber = ""; 
+	private double grossSales; // vendas brutas semanais
+	private double commissionRate; // percentagem da comissão
+	
+	public CommissionEmployee(String socialSecurityNumber, String lastName, String firstName, 
+							  double grossSales, double commissionRate) {
+		this.grossSales = grossSales;
+		this.commissionRate = commissionRate;
+		this.socialSecurityNumber = socialSecurityNumber;
+		
+	}
+	
+	
+
+	
+	
+}

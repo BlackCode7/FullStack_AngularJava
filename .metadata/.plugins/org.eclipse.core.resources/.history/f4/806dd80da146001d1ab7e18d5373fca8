@@ -1,0 +1,29 @@
+package commissionEmployee;
+
+public class CommissionEmployee  extends Object{
+
+	private String firstName = "";
+	private String lastName = "";
+	private String socialSecurityNumber = ""; 
+	private double grossSales; // vendas brutas semanais
+	private double commissionRate; // percentagem da comissão
+	
+	public CommissionEmployee(String socialSecurityNumber, String lastName, String firstName, 
+							  double grossSales, double commissionRate) throws IllegalAccessException {
+				
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.grossSales = grossSales;
+		this.commissionRate = commissionRate;
+		this.socialSecurityNumber = socialSecurityNumber;	
+		
+		if( grossSales < 0.0 )throw new IllegalAccessException("Gross sales must be >= 0.0");
+		if( commissionRate <= 0.0 || )throw new IllegalAccessException("Commission rate must be > 0.0 and < 1.0");
+		
+	}
+	
+	
+
+	
+	
+}
