@@ -5200,3 +5200,40 @@ Caused by: java.lang.NoSuchMethodException: org.springframework.context.annotati
 !MESSAGE Save operation warnings.
 !SUBENTRY 1 org.eclipse.core.resources 2 234 2022-10-17 20:58:49.415
 !MESSAGE The project description file (.project) for 'pos-java-jdbc' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY org.eclipse.ui.monitoring 4 0 2022-10-18 05:50:42.722
+!MESSAGE UI freeze of 53s at 05:49:49.878
+!SUBENTRY 1 org.eclipse.ui.monitoring 1 0 2022-10-18 05:50:42.723
+!MESSAGE Sample at 05:50:17.871 (+27,993s)
+Thread 'main' tid=1 (RUNNABLE)
+!STACK 0
+Stack Trace
+	at org.eclipse.swt.internal.win32.OS.GetMessageTime(Native Method)
+	at org.eclipse.swt.widgets.Display.getLastEventTime(Display.java:2012)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4095)
+	at org.eclipse.swt.widgets.Display.sendPostEvent(Display.java:4130)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:191)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3897)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3527)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:658)
+	at org.eclipse.ui.internal.Workbench$$Lambda$186/0x000000010032a440.run(Unknown Source)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:557)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base@11.0.13/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base@11.0.13/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base@11.0.13/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base@11.0.13/java.lang.reflect.Method.invoke(Method.java:566)
+	at app//org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at app//org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at app//org.eclipse.equinox.launcher.Main.run(Main.java:1447)
