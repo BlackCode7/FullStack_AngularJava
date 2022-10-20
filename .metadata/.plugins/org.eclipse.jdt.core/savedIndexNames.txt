@@ -24,6 +24,7 @@ INDEX VERSION 1.131+E:\Projetos_Programacao\FullStack_AngularJava\.metadata\.plu
 2163437264.index
 450139188.index
 4166853364.index
+491954712.index
 4259204528.index
 311482528.index
 2476865359.index
@@ -42,7 +43,6 @@ INDEX VERSION 1.131+E:\Projetos_Programacao\FullStack_AngularJava\.metadata\.plu
 2720295188.index
 3653233711.index
 3353628157.index
-2419418408.index
 844344488.index
 640847768.index
 1621102275.index
@@ -118,7 +118,6 @@ INDEX VERSION 1.131+E:\Projetos_Programacao\FullStack_AngularJava\.metadata\.plu
 3002423922.index
 2262919179.index
 3731625551.index
-1999592545.index
 1528315276.index
 134166081.index
 91180383.index
@@ -137,7 +136,6 @@ INDEX VERSION 1.131+E:\Projetos_Programacao\FullStack_AngularJava\.metadata\.plu
 2683540696.index
 1579195916.index
 2118292719.index
-3908339760.index
 4260090214.index
 3785235502.index
 2457795267.index
@@ -211,7 +209,6 @@ INDEX VERSION 1.131+E:\Projetos_Programacao\FullStack_AngularJava\.metadata\.plu
 3562856299.index
 1059427438.index
 1993001372.index
-2586181095.index
 913659378.index
 663139801.index
 3133800050.index
