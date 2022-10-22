@@ -1,0 +1,7 @@
+spring:
+  elasticsearch:
+      enabled: true
+      backend:
+        type: elasticsearch
+        dynamic_mapping: true
+        uris: http://localhost:9200/ 

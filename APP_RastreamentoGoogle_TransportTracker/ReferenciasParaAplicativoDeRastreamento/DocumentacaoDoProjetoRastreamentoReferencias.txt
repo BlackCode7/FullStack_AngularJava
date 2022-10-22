@@ -21,3 +21,21 @@ https://www.geeksforgeeks.org/project-idea-real-time-vehicle-tracking/
 Blogs de Referências
 https://circuitdigest.com/microcontroller-projects/vehicle-tracking-system-using-arduino-gps-and-gsm
 https://www.filipeflop.com/blog/faca-seu-rastreador-veicular-com-esp32-gps-e-freertos/
+
+******************************************************************************
+*********************** Instalação do Json Serve **********************************
+******************************************************************************
+
+npm install json-server
+
+# Run JSON server
+json-server --watch db.json
+
+# Change the server PORT
+json-server --watch db.json --port 4000
+
+
+
+******************************************************************************
+*********************** Instalação do BOOTSTRAP **********************************
+******************************************************************************
