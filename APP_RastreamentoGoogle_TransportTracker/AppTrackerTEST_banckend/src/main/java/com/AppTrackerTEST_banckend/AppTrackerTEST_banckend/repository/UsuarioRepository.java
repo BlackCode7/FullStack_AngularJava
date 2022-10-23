@@ -2,12 +2,16 @@ package com.AppTrackerTEST_banckend.AppTrackerTEST_banckend.repository;
 
 import java.util.List;
 
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
 
 import com.AppTrackerTEST_banckend.AppTrackerTEST_banckend.model.UsuarioModel;
 
-public interface UsuarioRepository extends ElasticsearchRepository<UsuarioModel, String> {
+public interface UsuarioRepository {
 
     List<UsuarioModel> findUsuarioModels(String nome);
+
+    void saveAll(List<UsuarioModel> usuarioModel);
+
+    Iterable<UsuarioModel> findAll();
     
 }

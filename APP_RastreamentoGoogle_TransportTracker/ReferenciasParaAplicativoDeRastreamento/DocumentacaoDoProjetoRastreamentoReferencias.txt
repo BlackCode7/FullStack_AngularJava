@@ -39,3 +39,9 @@ json-server --watch db.json --port 4000
 ******************************************************************************
 *********************** Instalação do BOOTSTRAP **********************************
 ******************************************************************************
+
+npm install @angular/material @angular/cdk @angular/animations
+
+ng add @angular/material
+
+

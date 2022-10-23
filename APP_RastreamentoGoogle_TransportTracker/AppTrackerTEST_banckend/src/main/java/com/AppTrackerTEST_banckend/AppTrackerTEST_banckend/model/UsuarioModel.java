@@ -1,12 +1,9 @@
 package com.AppTrackerTEST_banckend.AppTrackerTEST_banckend.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document( indexName = "IndexUserTrackLover", shards = 1, replicas = 0, refreshInterval = "1s", createIndex = true )
 public class UsuarioModel {
 
-    @Id private Long id;
+    private Long id;
     private String nome;
     private String sobreNome;
     private int idade;
