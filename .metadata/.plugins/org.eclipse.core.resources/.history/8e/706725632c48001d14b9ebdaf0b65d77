@@ -1,5 +1,0 @@
-package TelaTimeThread;
-
-public class ImplemntacaoFilaThread_2 extends Thread{
-
-}

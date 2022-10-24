@@ -10,15 +10,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListaUsuariosComponent
   ],
   imports: [
+    
+    HttpClientModule,
     MatBadgeModule,
     MatButtonModule,
     MatIconModule,

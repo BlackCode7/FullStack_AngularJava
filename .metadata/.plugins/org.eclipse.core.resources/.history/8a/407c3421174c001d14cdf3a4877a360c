@@ -1,5 +1,0 @@
-package com.emailsender.emailsender.resource;
-
-public class EmailMessage {
-
-}

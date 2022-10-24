@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator( name="seq_usuario", allocationSize = 1, initialValue = 1)
+@SequenceGenerator( name="seq_usuario", sequenceName = "seq_usuario", allocationSize = 1, initialValue = 1)
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
