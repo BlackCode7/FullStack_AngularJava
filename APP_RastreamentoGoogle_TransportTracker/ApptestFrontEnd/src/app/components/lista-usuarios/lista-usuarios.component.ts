@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IUsuarios } from './IUsuarios.model';
 import { UsuarioServiceService } from './usuario-service.service';
+import { Observable, Subscriber } from 'rxjs';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -9,20 +11,31 @@ import { UsuarioServiceService } from './usuario-service.service';
 })
 export class ListaUsuariosComponent implements OnInit {
 
-  usuariosModel: IUsuarios  = new IUsuarios()  ;
+  dataSource: any = new Array<IUsuarios>();
+
+  displayedColumns = ["nome", "email"];
 
   constructor(
     private usuariosService: UsuarioServiceService
   ) { }
 
-  ngOnInit(): void {
-    this.getUsuarios();
+  ngOnInit() {
+    this.getUsuarios()
   }
+
+  transformArrayTableInContinuos( obj: any){
+    
+  }
+
 
   getUsuarios(){
     this.usuariosService.getUsuarios().subscribe( data => {
-      this.usuariosModel = data;
+      this.dataSource = data;
+      data = this.dataSource
+      return data
     })
   }
+
+
 
 }

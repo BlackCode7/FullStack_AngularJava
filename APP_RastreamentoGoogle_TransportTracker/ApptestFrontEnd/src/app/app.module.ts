@@ -13,6 +13,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -22,7 +23,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     ListaUsuariosComponent
   ],
   imports: [
-    
+    MatTableModule,
     HttpClientModule,
     MatBadgeModule,
     MatButtonModule,
