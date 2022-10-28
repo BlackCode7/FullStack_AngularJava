@@ -25,7 +25,7 @@ public class UsuarioController {
 	
 	/* Método para listar usuários */
 	@CrossOrigin
-	@RequestMapping(value="/listatodos", method = RequestMethod.GET)
+	@RequestMapping(value="/listatodos", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Usuario>> listausuario(){
 		List<Usuario> usuario = repository.findAll();
@@ -34,7 +34,7 @@ public class UsuarioController {
 	
 	@CrossOrigin
 	@ResponseBody
-	@GetMapping( value = "/buscaPorNome")
+	@GetMapping( value = "/buscaPorNome", produces = "application/json")
 	public ResponseEntity<List<Usuario>> buscaPartesNome( @RequestParam(name="nome") String nome ){
 		List<Usuario> usuario = repository.buscaPorNome(nome.strip().toUpperCase());
 		return new ResponseEntity<List<Usuario>>(usuario, HttpStatus.OK);
