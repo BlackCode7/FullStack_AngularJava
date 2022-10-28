@@ -11,8 +11,8 @@ import { MatTable } from '@angular/material/table';
 })
 export class ListaUsuariosComponent implements OnInit {
 
+  /* Dados retornados na tabela */
   dataSource: any = new Array<IUsuarios>();
-
   displayedColumns = ["nome", "email"];
 
   constructor(
@@ -23,16 +23,10 @@ export class ListaUsuariosComponent implements OnInit {
     this.getUsuarios()
   }
 
-  transformArrayTableInContinuos( obj: any){
-    
-  }
-
-
+ 
   getUsuarios(){
     this.usuariosService.getUsuarios().subscribe( data => {
       this.dataSource = data;
-      data = this.dataSource
-      return data
     })
   }
 

@@ -5,7 +5,30 @@
 ******************************************************************************
 ******************************************************************************
 
+-------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+-------------------------------- Instalando google maps no angular ------------------------------------
+
+criando as credenciais no google cloud
+-------------> https://www.youtube.com/watch?v=7P5Oj8heApU <-----------------------------------
+
+npm i -D @types/google.maps
+npm install -g @agm/core --save ---> deve ser instalado globalmente
+npm install -g @types/googlemaps --save-dev  ---> deve ser instalado globalmente
+npm install -g @angular/google-maps  ---> deve ser instalado globalmente
+
+https://github.com/ankush1802/Angular14GoogleMaps
+
+https://www.c-sharpcorner.com/article/how-to-integrate-google-maps-in-angular-14-app/
+
+npm install @agm/core --save
+
+
+-------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 https://maplink.global/blog/como-rastrear-veiculo-google-maps/
+
 
 ----------- PROJETO USANDO API DO GOOGLE PARA RASTREAMENTO -------------------
 
@@ -31,6 +54,7 @@ npm install json-server
 # Run JSON server
 json-server --watch db.json
 
+
 # Change the server PORT
 json-server --watch db.json --port 4000
 
@@ -39,6 +63,8 @@ json-server --watch db.json --port 4000
 ******************************************************************************
 *********************** Instalação do BOOTSTRAP **********************************
 ******************************************************************************
+
+
 
 npm install @angular/material @angular/cdk @angular/animations
 
