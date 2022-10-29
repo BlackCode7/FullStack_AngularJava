@@ -8,7 +8,7 @@ import { IUsuarios } from './IUsuarios.model';
 })
 export class UsuarioServiceService {
 
-  baseURL: string = "http://localhost:8170/ApptestBackEnd/listatodos";
+  baseURL: string = "http://localhost:8170/ApptestBackEnd/usuario/listatodos";
 
   constructor( private http: HttpClient ) { }
 
