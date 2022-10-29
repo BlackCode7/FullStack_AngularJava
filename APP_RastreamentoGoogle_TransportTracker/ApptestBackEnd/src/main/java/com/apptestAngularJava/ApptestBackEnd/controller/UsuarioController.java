@@ -24,75 +24,75 @@ import com.apptestAngularJava.ApptestBackEnd.model.Usuario;
 import com.apptestAngularJava.ApptestBackEnd.repository.UsuarioRepository;
 
 @RestController
-@RequestMapping( value = "/usuario")
+@RequestMapping(value = "/usuario")
 public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository userRepository;
-	
+
 	/* Deletar Usuários */
 	@CrossOrigin
-	@ResponseBody
 	@DeleteMapping(value = "/deletausuario/{id}", produces = "application/text")
-	public String deletarusuario( @PathVariable("id") Long id ) {
+	public String deletarusuario(@PathVariable("id") Long id) {
 		userRepository.deleteById(id);
 		return "Ok usuário deletado com sucesso!";
 	}
-	
+
 	/* Atualiza usuarios */
 	@CrossOrigin
-	@ResponseStatus(HttpStatus.OK)
-	@PutMapping(value = "atualizausuario", produces = "application/json" )
-	public ResponseEntity<Usuario> atualizarUsuario( @RequestBody Usuario usuario ){
-		Usuario usuarioSalvo = userRepository.save(usuario);
-		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
+	@PutMapping(value = "atualizausuario", produces = "application/json")
+	public ResponseEntity<Usuario> atualizarUsuario(@RequestBody Usuario usuario) {
+
+		// Associando o papel com o usuário - do objetos pai para o filho -
+		// referenciando
+		/* for (int pos = 0; pos < usuario.getRole().size(); pos++) {
+			usuario.getRole().get(pos).setUsuario(usuario);
+		}*/
+		 
+
+		Usuario atualUsuarioSalvo = userRepository.save(usuario);
+		return new ResponseEntity<Usuario>(atualUsuarioSalvo, HttpStatus.OK);
 	}
-	
+
 	/* Salvando usuarios */
 	@CrossOrigin
-	@ResponseStatus(HttpStatus.OK)
-	@PostMapping(value = "salvausuario", produces = "application/json" )
-	public ResponseEntity<Usuario> cadastrarusuario( @RequestBody Usuario usuario ){
+	@PostMapping(value = "salvausuario", produces = "application/json")
+	public ResponseEntity<Usuario> cadastrarusuario(@RequestBody Usuario usuario) {
+
+		// Associando o papel com o usuário - do objetos pai para o filho -
+		// referenciando
+		/*
+		 for (int pos = 0; pos < usuario.getNomeExercicio().size(); pos++) {
+			usuario.getNomeExercicio().get(pos).setUsuario(usuario);
+		 }
+		 */
+		 		
+
 		Usuario usuarioSalvo = userRepository.save(usuario);
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
 	}
-	
+
 	/* consulta por ID */
 	@CrossOrigin
-	@GetMapping( value = "/{id}", produces = "application/json" )
-	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Usuario> buscaPorID( @PathVariable ( value = "id" ) Long id ){
-		Optional<Usuario> usuario = userRepository.findById(id);
-		return new ResponseEntity<Usuario>( usuario.get(), HttpStatus.OK );
+	@GetMapping(value = "/{id}", produces = "application/json")
+	public ResponseEntity<Usuario> buscaPorID(@PathVariable(value = "id") Long id) {
+		Optional<Usuario> buscaPorIdUsuario = userRepository.findById(id);
+		return new ResponseEntity<Usuario>(buscaPorIdUsuario.get(), HttpStatus.OK);
 	}
-	
-	
+
 	/* Método para listar usuários */
 	@CrossOrigin
-	@RequestMapping(value="/listatodos", method = RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<Usuario>> listausuario(){
-		List<Usuario> usuario = userRepository.findAll();
-		return new ResponseEntity<List<Usuario>>(usuario, HttpStatus.OK);
+	@GetMapping(value = "/listatodos", produces = "application/json")
+	public ResponseEntity<List<Usuario>> listausuario() {
+		List<Usuario> listaTodosUsuario = userRepository.findAll();
+		return new ResponseEntity<List<Usuario>>(listaTodosUsuario, HttpStatus.OK);
 	}
-	
+
 	@CrossOrigin
-	@ResponseBody
-	@GetMapping( value = "/buscaPorNome", produces = "application/json")
-	public ResponseEntity<List<Usuario>> buscaPartesNome( @RequestParam(name="nome") String nome ){
-		List<Usuario> usuario = userRepository.buscaPorNome(nome.strip().toUpperCase());
-		return new ResponseEntity<List<Usuario>>(usuario, HttpStatus.OK);
+	@GetMapping(value = "/buscaPorNome", produces = "application/json")
+	public ResponseEntity<List<Usuario>> buscaPartesNome(@RequestParam(name = "nome") String nome) {
+		List<Usuario> busacaPorNomeUsuario = userRepository.buscaPorNome(nome.strip().toUpperCase());
+		return new ResponseEntity<List<Usuario>>(busacaPorNomeUsuario, HttpStatus.OK);
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
