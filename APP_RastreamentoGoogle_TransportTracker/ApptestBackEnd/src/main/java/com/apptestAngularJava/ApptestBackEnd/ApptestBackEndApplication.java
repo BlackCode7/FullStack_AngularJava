@@ -32,7 +32,7 @@ public class ApptestBackEndApplication implements WebMvcConfigurer{
 	public void addCorsMappings( CorsRegistry registry ) {
 		registry.addMapping("*")
 		.allowedMethods("*")
-		.allowedOrigins("*");
+		.allowedOrigins("*");//http://localhost:4200/
 	}
 		
 	
