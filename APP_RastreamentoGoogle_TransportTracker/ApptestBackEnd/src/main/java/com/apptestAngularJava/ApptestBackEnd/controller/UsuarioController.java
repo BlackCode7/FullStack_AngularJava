@@ -31,7 +31,7 @@ public class UsuarioController {
 	private UsuarioRepository userRepository;
 
 	/* Deletar Usuários */
-	@CrossOrigin
+	//@CrossOrigin
 	@DeleteMapping(value = "/deletausuario/{id}", produces = "application/text")
 	public String deletarusuario(@PathVariable("id") Long id) {
 		userRepository.deleteById(id);
@@ -39,7 +39,7 @@ public class UsuarioController {
 	}
 
 	/* Atualiza usuarios */
-	@CrossOrigin
+	//@CrossOrigin
 	@PutMapping(value = "atualizausuario", produces = "application/json")
 	public ResponseEntity<Usuario> atualizarUsuario(@RequestBody Usuario usuario) {
 
@@ -55,7 +55,7 @@ public class UsuarioController {
 	}
 
 	/* Salvando usuarios */
-	@CrossOrigin
+	//@CrossOrigin
 	@PostMapping(value = "salvausuario", produces = "application/json")
 	public ResponseEntity<Usuario> cadastrarusuario(@RequestBody Usuario usuario) {
 
@@ -73,7 +73,7 @@ public class UsuarioController {
 	}
 
 	/* consulta por ID */
-	@CrossOrigin
+	//@CrossOrigin
 	@GetMapping(value = "/{id}", produces = "application/json")
 	public ResponseEntity<Usuario> buscaPorID(@PathVariable(value = "id") Long id) {
 		Optional<Usuario> buscaPorIdUsuario = userRepository.findById(id);
@@ -81,14 +81,14 @@ public class UsuarioController {
 	}
 
 	/* Método para listar usuários */
-	@CrossOrigin
+	//@CrossOrigin
 	@GetMapping(value = "/listatodos", produces = "application/json")
 	public ResponseEntity<List<Usuario>> listausuario() {
 		List<Usuario> listaTodosUsuario = userRepository.findAll();
 		return new ResponseEntity<List<Usuario>>(listaTodosUsuario, HttpStatus.OK);
 	}
 
-	@CrossOrigin
+	//@CrossOrigin
 	@GetMapping(value = "/buscaPorNome", produces = "application/json")
 	public ResponseEntity<List<Usuario>> buscaPartesNome(@RequestParam(name = "nome") String nome) {
 		List<Usuario> busacaPorNomeUsuario = userRepository.buscaPorNome(nome.strip().toUpperCase());

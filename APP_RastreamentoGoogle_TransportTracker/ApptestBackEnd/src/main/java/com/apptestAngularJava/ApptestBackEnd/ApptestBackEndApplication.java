@@ -21,20 +21,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 @RestController
 @EnableAutoConfiguration
-public class ApptestBackEndApplication {
+public class ApptestBackEndApplication implements WebMvcConfigurer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApptestBackEndApplication.class, args);
 	}
 	
-	@Bean //Liberando o cors da aplicação
-	public WebMvcConfigurer  corsConfigurer() {
-		return new WebMvcConfigurer() {
-			public void addCorsMappings( CorsRegistry registry ) {
-				registry.addMapping("*").allowedOrigins("*");
-			}
-		};
+	//Liberando o cors da aplicação
+	@Override
+	public void addCorsMappings( CorsRegistry registry ) {
+		registry.addMapping("*")
+		.allowedMethods("*")
+		.allowedOrigins("*");
 	}
+		
 	
 	
 	
