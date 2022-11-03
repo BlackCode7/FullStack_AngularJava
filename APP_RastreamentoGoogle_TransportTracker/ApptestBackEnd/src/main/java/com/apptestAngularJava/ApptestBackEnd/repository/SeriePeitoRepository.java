@@ -13,5 +13,7 @@ public interface SeriePeitoRepository extends JpaRepository<SeriePeito, Long>{
 	
 	@Query( value = " Select sp from SeriePeito sp where upper(trim(sp.nomeExercicio)) like %?1% " )
 	List<SeriePeito> buscaPorNomeExercicio( String nomeExercicio);
+	
+	//List<SeriePeito> findById();
 
 }

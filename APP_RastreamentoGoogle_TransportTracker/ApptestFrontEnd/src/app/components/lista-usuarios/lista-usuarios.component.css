@@ -1,0 +1,28 @@
+
+
+
+
+
+/*ALINHAMENTO HORIZONTAL DOS RETANGULOS*/
+.container3{
+    display: flex;
+}
+div:nth-child(6){
+    margin-right: auto;
+}
+
+#margin-p-2{    
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(127, 208, 255);
+    align-items: center;
+    
+}
+
+#margin-p{    
+    border-radius: 5px;
+    padding: 10px;
+    background-color: aquamarine;
+    align-items: center;
+    margin-left: 10px;
+}

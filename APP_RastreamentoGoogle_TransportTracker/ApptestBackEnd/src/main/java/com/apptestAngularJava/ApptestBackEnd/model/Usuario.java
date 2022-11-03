@@ -2,21 +2,31 @@ package com.apptestAngularJava.ApptestBackEnd.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.ForeignKey;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
 @SequenceGenerator( name="seq_usuario", sequenceName = "seq_usuario", allocationSize = 1, initialValue = 1)
-public class Usuario implements Serializable{
+public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -25,13 +35,18 @@ public class Usuario implements Serializable{
 	private Long id;
 	private String nome;
 	private String email;
+	private String senha;
 	
 	@OneToMany( mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL )
 	private List<SeriePeito> seriePeito = new ArrayList<SeriePeito>();
 	
-	//@OneToMany( mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL )
-	//private List<Role> role = new ArrayList<Role>();
-		
+	
+	/*
+	 * @OneToMany( fetch = FetchType.EAGER )
+	private List<Role> role;
+	 */		
+	
+	
 	public List<SeriePeito> getNomeExercicio() {
 		return seriePeito;
 	}
@@ -39,6 +54,12 @@ public class Usuario implements Serializable{
 		this.seriePeito = nomeExercicio;
 	}
 	
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	public Usuario() {}	
 
 	public Long getId() {
@@ -125,6 +146,45 @@ public class Usuario implements Serializable{
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", nomeSeriePeito=" + seriePeito
 				+ ", role=" + "]";
+	}
+	
+	
+	
+	/* Autorização de usuários - ROLES */	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {		
+		return null;
+	}
+	
+	
+	
+	@Override
+	public String getPassword() {
+		return this.senha;
+	}
+	@Override
+	public String getUsername() {
+		return this.nome;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

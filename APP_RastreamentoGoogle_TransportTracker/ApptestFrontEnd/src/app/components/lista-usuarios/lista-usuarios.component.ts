@@ -13,7 +13,10 @@ export class ListaUsuariosComponent implements OnInit {
 
   /* Dados retornados na tabela */
   dataSource: any = new Array<IUsuarios>();
-  displayedColumns = ["nome", "email"];
+  displayedColumns = ["nome", "email", "seriePeito"];
+
+  testss: any = new Array<IUsuarios>();
+
 
   constructor(
     private usuariosService: UsuarioServiceService
