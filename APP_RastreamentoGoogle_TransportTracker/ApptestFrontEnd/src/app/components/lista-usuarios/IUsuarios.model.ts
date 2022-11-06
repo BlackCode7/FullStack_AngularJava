@@ -4,5 +4,5 @@ export class IUsuarios {
     id?:number;
     nome!: string;
     email!: string;
-    seriePeito: Array<ISerieExercicio> = new Array<ISerieExercicio>();
+    seriePeito: Array<any> = new Array<ISerieExercicio>();
 }
