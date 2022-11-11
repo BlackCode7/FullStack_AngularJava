@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -30,19 +31,20 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{ //2
 		
 		// Ativasndo o acesso a página inicial para usuarios nã válidos
 		.disable().authorizeRequests()
-		.antMatchers("/").permitAll();
-		//.antMatchers("/localhost:4200").permitAll() //;
+		.antMatchers("/").permitAll()
+		.antMatchers("/index").permitAll() //;
 		
 		// URL de logout - Redireciona apos o user deslogar do sistema
-		//.anyRequest().authenticated().and().logout().logoutUrl("*") // >>>> falta o arquivo estar disponivel
+		.anyRequest().authenticated().and().logout().logoutUrl("/index") // >>>> falta o arquivo estar disponivel
 		
 		// Mapeia URl de Logout 
-		//.logoutRequestMatcher( new AntPathRequestMatcher( "*" ) ); // >>>> falta o arquivo estar disponivel
-		
-		
+		.logoutRequestMatcher( new AntPathRequestMatcher( "/logout" )) // >>>> falta o arquivo estar disponivel
+				
 		// Criação do JWT - filtra as requisições de login para autenticação 
+		.and().addFilterBefore( new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
 		
 		// Filtra demais requisições para verificar a presença do TOKEN JWT no header http 
+		.addFilterBefore(new JWTApiAutenticacaoFilter(), UsernamePasswordAuthenticationFilter.class);
 		
 		
 		
