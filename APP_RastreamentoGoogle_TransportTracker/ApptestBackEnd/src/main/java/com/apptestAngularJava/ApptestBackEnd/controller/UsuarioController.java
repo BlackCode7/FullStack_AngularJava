@@ -40,14 +40,14 @@ public class UsuarioController {
 
 	/* Atualiza usuarios */
 	@CrossOrigin
-	@PutMapping(value = "atualizausuario", produces = "application/json")
+	@PutMapping(value = "/atualizausuario", produces = "application/json")
 	public ResponseEntity<Usuario> atualizarUsuario(@RequestBody Usuario usuario) {
 
 		// Associando o papel com o usuário - do objetos pai para o filho -
 		// referenciando
-		/* for (int pos = 0; pos < usuario.getRole().size(); pos++) {
-			usuario.getRole().get(pos).setUsuario(usuario);
-		}*/		 
+		for (int pos = 0; pos < usuario.getNomeExercicio().size(); pos++) {
+			usuario.getNomeExercicio().get(pos).setUsuario(usuario);
+		}	 
 
 		Usuario atualUsuarioSalvo = userRepository.save(usuario);
 		return new ResponseEntity<Usuario>(atualUsuarioSalvo, HttpStatus.OK);
@@ -59,11 +59,11 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> cadastrarusuario(@RequestBody Usuario usuario) {
 		// Associando o papel com o usuário - do objetos pai para o filho -
 		// referenciando
-		/*
+		
 		 for (int pos = 0; pos < usuario.getNomeExercicio().size(); pos++) {
 			usuario.getNomeExercicio().get(pos).setUsuario(usuario);
 		 }
-		 */	 
+			 
 		Usuario usuarioSalvo = userRepository.save(usuario);
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
 	}
@@ -85,10 +85,10 @@ public class UsuarioController {
 	}
 
 	@CrossOrigin
-	@GetMapping(value = "/buscaPorNome", produces = "application/json")
-	public ResponseEntity<List<Usuario>> buscaPartesNome(@RequestParam(name = "nome") String nome) {
-		List<Usuario> busacaPorNomeUsuario = userRepository.buscaPorNome(nome.strip().toUpperCase());
-		return new ResponseEntity<List<Usuario>>(busacaPorNomeUsuario, HttpStatus.OK);
+	@GetMapping(value = "/buscaPorLogin", produces = "application/json")
+	public ResponseEntity<List<Usuario>> buscaPartesLogin(@RequestParam(name = "login") String login) {
+		List<Usuario> buscaPorLoginUsuario = userRepository.buscaPorLogin(login.strip().toUpperCase());
+		return new ResponseEntity<List<Usuario>>(buscaPorLoginUsuario, HttpStatus.OK);
 	}
 
 }

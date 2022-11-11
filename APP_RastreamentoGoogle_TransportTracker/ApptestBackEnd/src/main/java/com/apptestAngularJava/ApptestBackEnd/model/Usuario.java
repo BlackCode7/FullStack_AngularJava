@@ -1,12 +1,13 @@
 package com.apptestAngularJava.ApptestBackEnd.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
 	private Long id;
-	private String nome;
+	private String login;
 	private String email;
 	private String senha;
 	
@@ -41,11 +42,11 @@ public class Usuario implements UserDetails {
 	private List<SeriePeito> seriePeito = new ArrayList<SeriePeito>();
 	
 	
-	/*
-	 * @OneToMany( fetch = FetchType.EAGER )
-	private List<Role> role;
-	 */		
-	
+	@OneToMany( fetch = FetchType.EAGER )
+	@JoinTable(name = "usuarios_role", uniqueConstraints = @UniqueConstraint (columnNames = { "usuario_id", "role_id" }, name = "unique_role_user"),	
+			joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id", table = "usuario", unique = false, foreignKey = @javax.persistence.ForeignKey( name = "usuario_fk", value = ConstraintMode.CONSTRAINT )),			
+			inverseJoinColumns = @JoinColumn( name = "role_id", referencedColumnName = "id", updatable = false, table = "role", unique = false, foreignKey = @javax.persistence.ForeignKey(name = "role_fk", value = ConstraintMode.CONSTRAINT)))	
+	private List<Role> roles; // Papeis do usuario	
 	
 	public List<SeriePeito> getNomeExercicio() {
 		return seriePeito;
@@ -70,12 +71,12 @@ public class Usuario implements UserDetails {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getEmail() {
@@ -105,7 +106,7 @@ public class Usuario implements UserDetails {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((seriePeito == null) ? 0 : seriePeito.hashCode());
 		return result;
 	}
@@ -129,10 +130,10 @@ public class Usuario implements UserDetails {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (login == null) {
+			if (other.login != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!login.equals(other.login))
 			return false;
 		if (seriePeito == null) {
 			if (other.seriePeito != null)
@@ -144,47 +145,41 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", nomeSeriePeito=" + seriePeito
+		return "Usuario [id=" + id + ", login=" + login + ", email=" + email + ", nomeSeriePeito=" + seriePeito
 				+ ", role=" + "]";
-	}
+	}	
 	
-	
-	
-	/* Autorização de usuários - ROLES */	
+	/* Autorização de usuários - ROLES_ADMIN, ROLE_GERENTE */	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {		
-		return null;
+		return roles;
 	}
-	
-	
-	
 	@Override
 	public String getPassword() {
-		return this.senha;
+		return senha;
 	}
 	@Override
 	public String getUsername() {
-		return this.nome;
+		return login;
 	}
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	
+	
 
 }
