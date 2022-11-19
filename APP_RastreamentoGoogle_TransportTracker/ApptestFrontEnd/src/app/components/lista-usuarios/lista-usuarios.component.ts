@@ -12,12 +12,12 @@ import { MatTable } from '@angular/material/table';
 export class ListaUsuariosComponent implements OnInit {
 
   /* Dados retornados na tabela */
-  dataSource: any = new Array<IUsuarios>();
+  dataSource: any = new IUsuarios();
   displayedColumns = ["nome", "email", "seriePeito"];
 
-  testss: any = new Array<IUsuarios>();
+  //testss: any = new Array<IUsuarios>();
 
-  dadosIpeia: any;
+  //dadosIpeia: any;
 
 
   constructor(
@@ -25,19 +25,21 @@ export class ListaUsuariosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getDadosIpeia()
+    //this.getDadosIpeia()
     this.getUsuarios()
   }
 
+/*
   getDadosIpeia(){
     this.usuariosService.getDadosIPEA().subscribe( dadosipeia => {
       this.dadosIpeia = dadosipeia
     })
   }
+*/
 
  
   getUsuarios(){
-    this.usuariosService.getUsuarios().subscribe( data => {
+    this.usuariosService.getUsuarios().subscribe( (data: any) => {
       this.dataSource = data;
     })
   }
