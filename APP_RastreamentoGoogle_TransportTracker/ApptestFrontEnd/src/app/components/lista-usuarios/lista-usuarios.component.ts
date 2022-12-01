@@ -24,6 +24,7 @@ export class ListaUsuariosComponent implements OnInit {
     private usuariosService: UsuarioServiceService
   ) { }
 
+  
   ngOnInit() {
     //this.getDadosIpeia()
     this.getUsuarios()

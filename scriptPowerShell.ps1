@@ -1,0 +1,3 @@
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
+
+cd E:\Projetos_Programacao\FullStack_AngularJava\testeEntradaPowerShell

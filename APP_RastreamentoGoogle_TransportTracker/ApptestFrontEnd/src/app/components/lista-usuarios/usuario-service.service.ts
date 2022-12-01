@@ -14,6 +14,7 @@ export class UsuarioServiceService {
 
   constructor( private http: HttpClient ) { }
 
+  // TODO melhorar este código
   getDadosIPEA(){
     return this.http.get<any>(this.dadosIPEA).pipe(
       map(retorno => retorno)

@@ -1,0 +1,963 @@
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+Oi Cecília bom dia! Hoje eu não vou conseguir participar da nossa diária,
+vou precisar resolver a autenticação de documento no cartório as 9h 
+pra entregar no detran hoje as 16:30h !  Hoje eu to um pouco enrolado, 
+mas nas outras reuniões estarei presente !
+
+Atividades do dia 29/11/2022
+1) - extração de relatórios do Balcão único
+2) - criação de perfis do sistema relacionamento
+3) - ajustes das branchs de desenvolvimento para os perfis
+
+
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+treino de elasticsearch
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html#docs-bulk
+
+**************************************************************************
+
+1.curl -XDELETE 127.0.0.1:9200/movies
+
+2.curl -XPUT '127.0.0.1:9200/movies?pretty' -d '
+{
+"settings": {
+"analysis": {
+"filter": {
+"autocomplete_filter": {
+"type": "edge_ngram",
+"min_gram": 1,
+"max_gram": 20
+}
+},
+"analyzer": {
+"autocomplete": {
+"type": "custom",
+"tokenizer": "standard",
+"filter": [
+"lowercase",
+"autocomplete_filter"
+]
+}
+}
+}
+}
+}'
+
+3.curl -XGET '127.0.0.1:9200/movies/_analyze?pretty' -d '
+{
+"analyzer": "autocomplete",
+"text": "sta"
+}'
+
+4.curl -XPUT '127.0.0.1:9200/movies/_mapping?pretty' -d '
+{
+"properties" : {
+"title": {
+"type" : "text",
+"analyzer": "autocomplete"
+}
+}
+}'
+
+5.curl -XPUT 127.0.0.1:9200/_bulk --data-binary @movies.json
+
+6.curl -XGET '127.0.0.1:9200/movies/_search?pretty' -d '
+{
+"query": {
+"match": {
+"title": "sta"
+}
+}
+}'
+
+7.curl -XGET '127.0.0.1:9200/movies/_search?pretty' -d '
+{
+"query": {
+"match": {
+"title": {
+"query": "sta",
+"analyzer": "standard"
+}
+}
+}
+}'
+
+8.curl -XGET '127.0.0.1:9200/movies/_search?pretty' -d '
+{
+"query": {
+"match": {
+"title": {
+"query": "star tr",
+"analyzer": "standard"
+}
+}
+}
+}'
+
+
+**************************************************************************
+Busca pagina com elasticsearch
+https://www.udemy.com/course/elasticsearch-elastic-stack/learn/lecture/23752976#overview
+
+precisamos definir o  ( "from" e "size" )
+
+
+**************************************************************************
+
+MAPPING EXCEPTION
+
+1.curl --request PUT 'http://localhost:9200/microservice-logs' --data-raw '
+{
+   "mappings": {
+       "properties": {
+           "timestamp": { "type": "date"  },
+           "service": { "type": "keyword" },
+           "host_ip": { "type": "ip" },
+           "port": { "type": "integer" },
+           "message": { "type": "text" }
+       }
+   }
+}'
+ 
+ 
+2.{
+"timestamp": "2020-04-11T12:34:56.789Z", 
+"service": "ABC", 
+"host_ip": "10.0.2.15", 
+"port": 12345, 
+"message": "Started!" 
+}
+ 
+ 
+3.curl --request POST 'http://localhost:9200/microservice-logs/_doc?pretty' --data-raw '
+{
+"timestamp": "2020-04-11T12:34:56.789Z", 
+"service": "XYZ", 
+"host_ip": "10.0.2.15", 
+"port": "15000", 
+"message": "Hello!" 
+}'
+ 
+ 
+4.curl --request POST 'http://localhost:9200/microservice-logs/_doc?pretty' --data-raw '
+{
+"timestamp": "2020-04-11T12:34:56.789Z", 
+"service": "XYZ", 
+"host_ip": "10.0.2.15", 
+"port": "NONE", 
+"message": "I am not well!" 
+}'
+ 
+ 
+ 
+5.curl --request POST 'http://localhost:9200/microservice-logs/_close'
+ 
+curl --location --request PUT 'http://localhost:9200/microservice-logs/_settings' --data-raw '
+{ 
+"index.mapping.ignore_malformed": true 
+}'
+ 
+curl --request POST 'http://localhost:9200/microservice-logs/_open'
+ 
+6.curl --request POST 'http://localhost:9200/microservice-logs/_doc?pretty' --data-raw '
+{
+"timestamp": "2020-04-11T12:34:56.789Z", 
+"service": "XYZ", 
+"host_ip": "10.0.2.15", 
+"port": "NONE", 
+"message": "I am not well!" 
+}'
+ 
+7.curl --request POST 'http://localhost:9200/microservice-logs/_doc?pretty' --data-raw '
+{
+"timestamp": "2020-04-11T12:34:56.789Z", 
+"service": "ABC", 
+"host_ip": "10.0.2.15", 
+"port": 12345, 
+"message": {"data": {"received":"here"}}
+}'
+ 
+8.curl --request POST 'http://localhost:9200/microservice-logs/_doc?pretty' --data-raw '
+{
+"timestamp": "2020-04-11T12:34:56.789Z", 
+"service": "ABC", 
+"host_ip": "10.0.2.15", 
+"port": 12345, 
+"message": "Received...", 
+"payload": {"data": {"received":"here"}}
+}'
+ 
+ 
+curl --request GET  'http://localhost:9200/microservice-logs/_mappings?pretty' 
+ 
+9.curl --request POST 'http://localhost:9200/microservice-logs/_doc?pretty' \
+--data-raw '
+{
+"timestamp": "2020-04-11T12:34:56.789Z", 
+"service": "ABC", 
+"host_ip": "10.0.2.15", 
+"port": 12345, 
+"message": "Received...", 
+"payload": {"data": {"received": {"even": "more"}}}
+}'
+ 
+ 
+sudo apt-get install jq
+  
+10.thousandone_fields_json=$(echo {1..1001..1} | jq -Rn '( input | split(" ") ) as $nums | $nums[] | . as $key | [{key:($key|tostring),value:($key|tonumber)}] | from_entries' | jq -cs 'add')
+ 
+echo "$thousandone_fields_json"
+ 
+curl --location --request PUT  'http://localhost:9200/big-objects'
+ 
+curl --request POST  'http://localhost:9200/big-objects/_doc?pretty' \ --data-raw "$thousandone_fields_json"
+ 
+ 
+curl --location --request PUT  'http://localhost:9200/big-objects/_settings' \--data-raw 
+{
+"index.mapping.total_fields.limit": 1001
+}
+
+**************************************************************************
+
+curl -XPUT "http://127.0.0.1:9200/demo-default/_doc/1" -d'{
+  "message": "[5592:1:0309/123054.737712:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.",
+  "fileset": {
+    "name": "syslog"
+  },
+  "process": {
+    "name": "org.gnome.Shell.desktop",
+    "pid": 3383
+  },
+  "@timestamp": "2020-03-09T18:00:54.000+05:30",
+  "host": {
+    "hostname": "bionic",
+    "name": "bionic"
+  }
+}'
+ 
+ 
+2.curl -XGET "http://127.0.0.1:9200/demo-default/_mapping?pretty=true"
+ 
+3.curl -XGET "http://127.0.0.1:9200/_cluster/state?pretty=true" >> es-cluster-state.json
+ 
+4.curl -XPUT "http://127.0.0.1:9200/demo-flattened"
+ 
+5.curl -XPUT "http://127.0.0.1:9200/demo-flattened/_mapping" -d'{
+  "properties": {
+    "host": {
+      "type": "flattened"
+    }
+  }
+}'
+ 
+6.curl -XPUT "http://127.0.0.1:9200/demo-flattened/_doc/1" -d'{
+  "message": "[5592:1:0309/123054.737712:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.",
+  "fileset": {
+    "name": "syslog"
+  },
+  "process": {
+    "name": "org.gnome.Shell.desktop",
+    "pid": 3383
+  },
+  "@timestamp": "2020-03-09T18:00:54.000+05:30",
+  "host": {
+    "hostname": "bionic",
+    "name": "bionic"
+  }
+}'
+ 
+7.curl -XGET "http://127.0.0.1:9200/demo-flattened/_mapping?pretty=true"
+ 
+8.curl -XPOST "http://127.0.0.1:9200/demo-flattened/_update/1" -d'{
+    "doc" : {
+        "host" : {
+          "osVersion": "Bionic Beaver",
+          "osArchitecture":"x86_64"
+        }
+    }
+}'
+ 
+9.curl -XGET "http://127.0.0.1:9200/demo-flattened/_search?pretty=true" -d'{
+  "query": {
+    "term": {
+      "host": "Bionic Beaver"
+    }
+  }
+}'
+ 
+10.curl -XGET "http://127.0.0.1:9200/demo-flattened/_search?pretty=true" -d'{
+  "query": {
+    "term": {
+      "host.osVersion": "Bionic Beaver"
+    }
+  }
+}'
+ 
+11.curl -XGET "http://127.0.0.1:9200/demo-flattened/_search?pretty=true" -d'{
+  "query": {
+    "term": {
+      "host.osVersion": "Beaver"
+    }
+  }
+}'
+
+**************************************************************************
+Criando um novo indice com relacionamento de filmes com series em um banco 
+NoSQL
+
+http://localhost:9200/series/_search?pretty
+SINTAXE - consulta por pai
+{
+    "query":{
+        "has_parent":{ "parent_type": "franchise", "query": { "match": { "title": "Rambo"} } }
+    }
+}
+
+SINTAXE - consulta por filho
+{
+    "query":{
+        "has_child":{
+            "type": "film",
+            "query":{ "match": { "title": " rambo " } }
+        }
+    }
+}
+
+Pegando dados de um arquivo comando >>> wget http://media.sundog-soft.com/es7/series.json
+
+PUT - http://localhost:9200/series
+{
+	"mappings":{
+		"properties":{
+			"film_to_franchise":{
+				"type":"join",
+				"relations":{"franchise":"film"}
+			}
+		}
+	}
+
+}
+
+**************************************************************************
+
+Utilizando o Analyzers
+
+Keyword type mapping
+* as vezes campos de texto precisam ter a correspondencia exata
+* Pra isso precisamos usar o mapping em vez de texto comum
+
+Text type mapping
+* Busca em campos de texto vãoretornar qualquer coisa, mesmo que com baixa relavância
+	* dependendo do analyzer, o resultado será sensivel a maiúscula e minuscula, flexões, 
+		remoção stopwords, aplicação de sinônimo
+	* Busca com multiplos termos não precisam ter uma correspondência de todos
+	
+GET - http://localhost:9200/movies/_search?pretty
+
+consulta - 1
+SINTAXE
+{
+    "query":{
+        "match": {
+            "title":"Interestelar"
+        }
+    }
+}
+
+consulta - 2 - para busca completa
+SINTAXE
+{
+    "query":{
+        "match_phrase": {
+            "genre":"sci"
+        }
+    }
+}
+
+consulta - 3 - para busca exata
+procedimento: deletar o indice movies e recriar ele novamente, quando recriar ele
+				o campo genre deve ser definido com keyword, para definir este
+				campo como um campo de busca exato, e podemos transformar o campo
+				em um analyzer usando a propriedade "analyzer": "english", com este
+				comando podemos buscar textos em inglês
+				
+
+1 - passo 1,  deletando o indice do elasticsearch
+	DELETE - http://localhost:9200/movies
+2 - passo 2, recriando novamente o indice e redefinindo a propriedade genre para keyword
+	PUT - http://localhost:9200/movies
+
+SINTAXE
+{
+    "mappings":{
+        "properties":{
+            "id":{"type": "integer"},
+            "year":{"type": "date"},
+            "genre":{"type": "keyword"},
+            "title":{"type": "text", "analyzer": "english"}
+        }
+    }
+}
+
+
+**************************************************************************
+concorrencia em elasticsearch
+
+DUVIDA PARA Carmo
+No sistema do relacionamento e nos outros sistemas da prodesp que usam o elasticsearch
+foi feito algum procedimento pra evitar problemas de concorrencia? 
+
+*Aqui é necessário usar condicional if
+
+*comando novo -> ?if_seq_no=15&if_primary_term=1
+*para saber o primary_term e o seq_no é preciso fazer um get
+
+PUT - http://localhost:9200/movies/_doc/5?if_seq_no=15&if_primary_term=1
+
+SINTAXE
+{
+	"genre":[ "drama", "Aventura" ],
+	"title":"Um sonho de liberdade",
+	"year":1995
+}
+
+**************************************************************************
+
+exercício - Atualizando por genero usando id
+
+POST  http://localhost:9200/movies/_doc/5/_update
+
+SINTAXE
+{    
+    "doc": {
+        "genre": [ "drama", "Aventura" ]
+    }
+}
+            
+
+**************************************************************************
+
+Excluir um filme do documento com DELETE
+
+http://localhost:9200/movies/_doc/GetTsIQB0KzbuxYRBdRN
+
+OBS: não é necessário passar nenhum parâmetro no corpo da requisição
+somente usar o ID para deletar o registro
+
+
+**************************************************************************
+
+Atualizando por id com PUT
+PUT  http://localhost:9200/movies/_doc/GetTsIQB0KzbuxYRBdRN?pretty >>> atualizando
+
+SINTAXE
+{
+    "genre": [
+            "IMAX",
+            "Sci-fi"
+        ],
+        "title": "Interestelar_atualizado",
+        "year": 2014
+}
+
+**************************************************************************
+
+*** Inserção de documentos em lotes
+*** comando para inserir doc em lotes >>> PUT 127.0.0.1:9200/_bulk -d
+
+POST http://localhost:9200/movies/_doc/_bulk
+
+SINTAXE
+{ "index" : {"_index" : "movies", "_id" : "1"} }
+{ "genre":["IMAX", "Sci-fi", "Ação"], "title":"Batman Dark Nigth", "year":2008 }
+
+{ "index" : {"_index" : "movies", "_id" : "2"} }
+{ "genre":["Ação"], "title":"Rambo", "year":1996 }
+
+{ "index" : {"_index" : "movies", "_id" : "3"} }
+{ "genre":["drama"], "title":"Um sonho de liberdade", "year":1995 }
+
+{ "index" : {"_index" : "movies", "_id" : "4"} }
+{ "genre":["Ação", "Sci-fi"], "title":"Matrix", "year":1999 }
+
+{ "index" : {"_index" : "movies", "_id" : "5"} }
+{ "genre":["Ação", "Sci-fi", "Filosofia"], "title":"Matrix Reloaded", "year":2000 }
+
+{ "index" : {"_index" : "movies", "_id" : "6"} }
+{ "genre":["Ação", "Sci-fi", "Filosofia"], "title":"Matrix Revolution", "year": 2001}
+
+{ "index" : {"_index" : "movies", "_id" : "7} }
+{ "genre":["Romance"], "title":"Como eu era antes de você", "year": 2007}
+
+**************************************************************************
+GET  http://localhost:9200/movies/_search?pretty  >>> consulta
+
+GET  http://localhost:9200/movies/_mapping  >>> consulta
+
+PUT 127.0.0.1:9200/movies/_doc/12121312 -d  >>> INSERIR
+
+SINTAXE
+{
+	"genre":["IMAX", "Sci-fi"],
+	"title":"Interestelar",
+	"year":2014
+}
+
+
+
+
+
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+[10:01] Carmo Vinieri Filho
+
+SINTAXE
+{    
+	"estatistica": {        "averiguacaoEvento": [],        "timestamp": 1614777499020    },    
+	"meusDados": {        "dataCriacao": 1614777500037,        "perfil": "administrador"    },    
+	"perfilAcesso": {        "nome": "Leitor Relatorio",        
+		"funcionalidades": [            
+			"funcionalidade": {"id": 0, "descricao": "Menu - Relatorio" }        
+		]    
+	}
+}
+
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+https://www.youtube.com/watch?v=WDHX8RtO4b8
+https://www.youtube.com/watch?v=7fSUaA24PPk
+
+estamos fechados dentro do próprio pensamento?
+Estamos cada um dentro da sua própria concha? 
+Estamos sem conexão?
+Perdemos a nossa intimidade?
+porque não somos mais confidentes?
+Voc"e consegue enxergar que o casamento esta ruim por conta de tantos problemas que enfrentamos? 
+Você sente falta de investimento na relação?
+Você sente solidão à dois ?
+Você esta confortável com o casamento ?
+O quanto vale a pena esta junto ainda ?
+
+PARA PERGUNTAR > entao eu me faço a pergunta: se não vale mais a pena estar junto eu prefiro estar sozinho,
+					prefiro colocar um ponto final no nosso casamento !
+
+PARA PERGUNTAR > olha eu me fiz essas perguntas e percebi que nos como casal não estamos bem,
+					eu não me sinto satisfeito, eu tenho necessidades que sao possíveis e não estão
+					sendo satisfeitas
+
+MÁXIMA > quanddo a pessoa de empenha se esforça pra atender uma expectativa minha
+			é sinal de que ela se importa!
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+WebConfigSecirity
+
+package com.apptestAngularJava.ApptestBackEnd.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.apptestAngularJava.ApptestBackEnd.service.ImplementacaoUserDetailsService;
+
+
+// mapeamos endereços, url autoriza ou bloqueia os acessos
+@Configuration
+@EnableWebSecurity //1
+public class WebConfigSecurity extends WebSecurityConfigurerAdapter{ //2
+	
+	//3
+	@Autowired
+	private ImplementacaoUserDetailsService implementacaoUserDetailsService;	
+
+	// 4 - configura as solicitação de acesso por http
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+		// Ativando a proteção contra usuario não validados por token
+		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+		
+		// Ativasndo o acesso a página inicial para usuarios nã válidos
+		.disable().authorizeRequests()
+		.antMatchers("/").permitAll()
+		.antMatchers("/index").permitAll() //;
+		
+		// URL de logout - Redireciona apos o user deslogar do sistema
+		.anyRequest().authenticated().and().logout().logoutUrl("/index") // >>>> falta o arquivo estar disponivel
+		
+		// Mapeia URl de Logout 
+		.logoutRequestMatcher( new AntPathRequestMatcher( "/logout" )) // >>>> falta o arquivo estar disponivel
+				
+		// Criação do JWT - filtra as requisições de login para autenticação 
+		.and().addFilterBefore( new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+		
+		// Filtra demais requisições para verificar a presença do TOKEN JWT no header http 
+		.addFilterBefore(new JWTApiAutenticacaoFilter(), UsernamePasswordAuthenticationFilter.class);		
+		
+	}
+	
+	// 5
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+		// Service que irá consultar o usuario no banco de dados
+		auth.userDetailsService(implementacaoUserDetailsService)
+		
+		// Padrão de condificação de senha de usuario
+		.passwordEncoder(new BCryptPasswordEncoder());
+		
+	}
+	
+
+}
+
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+ApplicationContextLoad
+
+package com.apptestAngularJava.ApptestBackEnd;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ApplicationContextLoad implements ApplicationContextAware{
+	
+	@Autowired
+	private static ApplicationContext applicationContext;
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {	
+		ApplicationContextLoad.applicationContext = applicationContext;		
+	}
+	
+	public static ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
+}
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+JWTLoginFilter
+
+package com.apptestAngularJava.ApptestBackEnd.security;
+
+import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.apptestAngularJava.ApptestBackEnd.model.Usuario;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+// Estabelece o gerenciador de token
+public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
+
+	// Config o gerenciador de autenticação
+	protected JWTLoginFilter( String url, AuthenticationManager authenticationManager) {
+		
+		//Obriga a autenticar URL
+		super( new AntPathRequestMatcher(url));
+		
+		//Gerencia a autenticação
+		setAuthenticationManager(authenticationManager);
+		
+	}
+
+	@Override // retorna o usuario que esta sendo processado
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+			throws AuthenticationException, IOException, ServletException {
+		
+		// Pega o token para validar
+		Usuario user = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
+		
+		// Retorna  o usuario login senha e acesso
+		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(user.getLogin(), user.getSenha()));
+	}
+	
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication authResult) throws IOException, ServletException {
+		new JWTTokenAuthenticacaoService().addAuthentication(response, authResult.getName());		
+	}
+
+}
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+JWTApiAutenticacaoFilter
+
+package com.apptestAngularJava.ApptestBackEnd.security;
+
+import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.GenericFilterBean;
+
+// Filtro todas requisições serao capturadas para autenticar
+public class JWTApiAutenticacaoFilter extends GenericFilterBean {
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+
+		// Estabelece autenticaçao para requisicao
+		Authentication authentication = new JWTTokenAuthenticacaoService()
+				.getAuthentication((HttpServletRequest) request);
+
+		//
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+
+		chain.doFilter(request, response);
+
+	}
+
+}
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+SecurityConfig
+
+package com.apptestAngularJava.ApptestBackEnd.security;
+
+import java.util.Arrays;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		
+		http.headers().frameOptions().disable();
+		http.cors().and().csrf().disable();
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.authorizeHttpRequests((auth) -> auth.anyRequest().permitAll());
+
+		return http.build();
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
+	
+}
+
+ 
+import java.util.Arrays;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		
+		http.headers().frameOptions().disable();
+		http.cors().and().csrf().disable();
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.authorizeHttpRequests((auth) -> auth.anyRequest().permitAll());
+
+		return http.build();
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
+}
+ 
+**************************************************************************
+**************************************************************************
+**************************************************************************
+
+JWTTokenAuthenticacaoService
+
+package com.apptestAngularJava.ApptestBackEnd.security;
+
+import java.io.IOException;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import com.apptestAngularJava.ApptestBackEnd.ApplicationContextLoad;
+import com.apptestAngularJava.ApptestBackEnd.model.Usuario;
+import com.apptestAngularJava.ApptestBackEnd.repository.UsuarioRepository;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+@Service
+@Component
+public class JWTTokenAuthenticacaoService {
+
+	// tempo de validade do token
+	private static final long EXPIRATION_TIME = 17280000;
+	
+	// uma senha unica para compor a autenticação
+	private static final String SECRET = "SenhaExtremamenteSecreta";
+
+	// prefixo padrão de Token
+	private static final String TOKEN_PREFIX = "Bearer";
+	
+	// usado para localizar a autorização
+	private static final String HEADER_STRING = "Authorization";
+
+	// gernado token de autenticação a add ao cabeçalho
+	public void addAuthentication( HttpServletResponse response, String username ) throws IOException{	
+		
+		// montagem do token
+		String JWT = Jwts.builder()
+				
+				//.setClaims(createClaims(account))
+				
+				.setSubject(username.toString()) // chama o geraor de token
+				.setExpiration(new Date( System.currentTimeMillis() + EXPIRATION_TIME )) // tempo de expiração
+				.signWith(SignatureAlgorithm.HS512, SECRET)
+				.compact(); // compactação algoritm geração de senha	
+		
+		System.out.println("AQUI");
+		
+		// Juntar com o prefix para formar o token
+		String token = TOKEN_PREFIX + " " + JWT; // Bearer >>> forma o token		
+		// Adicioan um cabeçalho http
+		response.addHeader(HEADER_STRING, token); // juntado Authorzation: Bearer + nsdflabsfoqebofqbeubq3o		
+		// Escreve token como resposta no corpo do http
+		response.getWriter().write("{\"Authorization\": \""+token+"\"}");			
+	}
+	
+	/*Retorna o usuário validado com token ou caso não sejá valido retorna null*/
+	public Authentication getAuthentication(HttpServletRequest request ) {	
+		
+		/*Pega o token enviado no cabeçalho http*/		
+		String token = request.getHeader(HEADER_STRING);		
+		if(token != null) {			
+			/*Faz a validação do token do usuário na requisição*/           
+			String user = Jwts.parser().setSigningKey(SECRET) /*Bearer 87878we8we787w8e78w78e78w7e87w*/
+													.parseClaimsJwt(token.replace(TOKEN_PREFIX, "")) /*87878we8we787w8e78w78e78w7e87w*/
+													.getBody().getSubject(); /*João Silva*/			
+			if(user != null) {	
+				Usuario usuario = ApplicationContextLoad.getApplicationContext()
+										.getBean(UsuarioRepository.class).findUserByLogin(user);				
+				if( usuario != null ) {					
+					return new UsernamePasswordAuthenticationToken(
+									usuario.getLogin(), 
+									usuario.getSenha(), 
+									usuario.getAuthorities());					
+				}
+			}	
+		}
+		return null; 
+	}
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

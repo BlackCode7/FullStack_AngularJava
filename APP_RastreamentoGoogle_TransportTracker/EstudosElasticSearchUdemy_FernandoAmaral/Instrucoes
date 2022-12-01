@@ -1,0 +1,8 @@
+usuario da máquina virtualbox >>> anderson
+senha da maquina virtual no ubuntu >>> b166er71
+
+1 - iniciando a máquina virtual com ubuntu e virtualbox
+2 - instalação do elasticsearch
+
+    comandos:
+                    wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
