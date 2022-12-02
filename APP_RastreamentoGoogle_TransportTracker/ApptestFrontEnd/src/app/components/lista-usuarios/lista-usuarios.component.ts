@@ -16,29 +16,21 @@ export class ListaUsuariosComponent implements OnInit {
   displayedColumns = ["nome", "email", "seriePeito"];
 
   //testss: any = new Array<IUsuarios>();
-
   //dadosIpeia: any;
-
-
   constructor(
     private usuariosService: UsuarioServiceService
-  ) { }
-
-  
+  ) { }  
   ngOnInit() {
     //this.getDadosIpeia()
     this.getUsuarios()
   }
-
 /*
   getDadosIpeia(){
     this.usuariosService.getDadosIPEA().subscribe( dadosipeia => {
       this.dadosIpeia = dadosipeia
     })
   }
-*/
-
- 
+*/ 
   getUsuarios(){
     this.usuariosService.getUsuarios().subscribe( (data: any) => {
       this.dataSource = data;

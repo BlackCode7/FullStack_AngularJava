@@ -2,10 +2,13 @@
 **************************************************************************
 **************************************************************************
 **************************************************************************
-Oi Cecília bom dia! Hoje eu não vou conseguir participar da nossa diária,
-vou precisar resolver a autenticação de documento no cartório as 9h 
-pra entregar no detran hoje as 16:30h !  Hoje eu to um pouco enrolado, 
-mas nas outras reuniões estarei presente !
+
+
+Atividades do dia 30/11/2022
+1) - criação de script pra rodar aplicação
+	passo_1(liberando total) - Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
+
+
 
 Atividades do dia 29/11/2022
 1) - extração de relatórios do Balcão único
