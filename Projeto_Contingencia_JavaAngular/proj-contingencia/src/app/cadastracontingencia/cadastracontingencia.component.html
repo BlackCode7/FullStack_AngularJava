@@ -1,0 +1,93 @@
+<div id="style-form-cadastro-geral">
+
+    <form class="form-horizontal" action="post">
+
+        <div id="style-form-tipOcorrence-local">
+            <div class="form-group">
+                <label for="sel1">Tipos de Ocorrências</label>
+                <select class="form-control" id="stile-select-sel1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sel1" id="style-local">Local</label>
+                <select class="form-control" id="stile-select-sel2">
+                    <option>Local1</option>
+                    <option>Local2</option>
+                    <option>Local3</option>
+                    <option>Local4</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- datetime-local - é uma string contendo data e hora -->
+        <div id="style-form-datetimelocal">
+            <div class="form-group">
+                <label for="data-hora-inicio">Data/Hora/Início</label>
+                <input type="datetime-local" class="form-control" id="data-hora-inicio">
+            </div>
+
+            <div class="form-group">
+                <label for="data-hora-inicio">Data/Hora/Fim</label>
+                <input type="datetime-local" class="form-control" id="data-hora-inicio">
+            </div>
+
+            <div id="style-form-orgao-space">
+                <div class="form-group">
+                    <label for="style-form-orgao">Orgão</label>
+                    <select class="form-control" id="style-form-orgao">
+                        <option>Orgão1</option>
+                        <option>Orgão2</option>
+                        <option>Orgão3</option>
+                        <option>Orgão4</option>
+                    </select>
+                </div>
+            </div>
+           
+
+        </div>
+
+        
+        <!-- BOTÕES -->
+        <div id="style-form-botao">
+            <button type="button" class="btn btn-primary">Buscar</button>
+            <button type="button" class="btn btn-danger" id="style-botao-2">Relacionar a contingência anterior</button>
+        </div>
+
+        <div id="style-form-caixa-selecao-dupla">
+
+            <div class="form-group">
+                <label for="style-form-orgao">Selecione um ou mais serviços afetados:</label>
+                <select class="form-control" id="style-form-selecaoServicos">
+                    <option>Selecione aqui os serviços disponíveis</option>
+                    <option>Orgão2</option>
+                    <option>Orgão3</option>
+                    <option>Orgão4</option>
+                </select>
+                <div class="form-group">
+                    <label for="comment">Serviços Selecionados</label>
+                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--Campo JUSTIFICATIVA-->
+        <div id="style-form-justificativa"></div>
+        <div class="form-group">
+            <label for="comment">Justificativa:</label>
+            <textarea class="form-control" rows="3" id="comment"></textarea>
+        </div>
+        <div id="style-form-botao">
+            <button type="button" class="btn btn-danger">Cadastrar</button>
+            <button type="button" class="btn btn-info" id="style-botao-2">Voltar</button>
+        </div>
+
+    </form>
+
+</div>

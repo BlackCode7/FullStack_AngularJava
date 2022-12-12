@@ -1,0 +1,21 @@
+<html>
+    <boby>
+        Teste de live serve
+        <script>
+            // escopo: global, funçao, bloco
+            var serie = 'The game of thrones';
+            console.log('Global: ',serie);            
+            function escopoFuncao(){
+                var serie2 = 'house of the dragons'
+                console.log('Funcao: ',serie2);
+            }
+            escopoFuncao()
+            if(true){
+                console.log('Bloco: ',serie);
+            }
+            {
+                console.log('Bloco: ',serie);
+            }
+        </script>
+    </boby>
+</html>

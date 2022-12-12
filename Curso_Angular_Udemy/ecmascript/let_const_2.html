@@ -1,0 +1,24 @@
+<html>
+    <boby>
+       teste do comportamento do LET
+        <script>
+            // escopo: global, funçao, bloco
+            // let não tem hosting
+            let serie = 'The game of thrones';
+                 var serie = "friends"
+                 let serie2 = "game of thrones";     
+            function escopoFuncao(){
+                if(true){
+                    console.log(serie);
+                    console.log(serie2);  
+                }              
+            }
+            escopoFuncao()
+            
+            {
+                console.log(serie);
+                console.log(serie2);  
+            }
+        </script>
+    </boby>
+</html>

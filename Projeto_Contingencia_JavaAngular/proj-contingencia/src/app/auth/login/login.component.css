@@ -1,0 +1,21 @@
+#style-geral{
+
+    background-color: f3024a00;
+    border: 1px solid #f3024a00;
+    
+
+    display: flex;
+    margin-left: 40%;
+
+    margin-top: 15em;
+    width: 300px;
+}
+
+#style-margin-between{
+    margin-top: 30px;
+}
+
+#style-long-button{
+    margin-top: 20px;
+    width: 100%;
+}

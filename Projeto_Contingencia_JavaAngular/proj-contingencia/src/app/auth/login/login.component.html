@@ -1,0 +1,32 @@
+
+
+
+    <div id="style-geral">
+        <form #formLogin="ngForm">
+    
+            <div id="style-margin-between">
+                <div class="form-group">
+                    <label for="usuario">Usuário:</label>
+                    <input type="text" class="form-control" id="usuario"  placeholder="Seu login" name="usuario"  [(ngModel)]="login.login" #usuario="ngModel"  required >
+                  </div>
+            </div>            
+        
+            <div id="style-margin-between">
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha" [(ngModel)]="login.senha" #senha="ngModel"  required >
+                  </div>
+            </div>            
+
+            <!-- LIBERA O ACESSO DO USUÁRIO SE AS CREDÊNCIAIS DELE FOREM VÁLIDAS - 
+                AO CLICAR NO BOTÃO >ENTRAR< >[disabled]="!formLogin.form.valid< -->
+            <div id="style-margin-between">
+                <button id="style-long-button" type="submit" class="btn btn-primary btn-lg" (click)="logar()" [disabled]="!formLogin.form.valid" >Entrar</button>
+            </div>            
+        
+          </form>
+    </div>
+    
+
+
+

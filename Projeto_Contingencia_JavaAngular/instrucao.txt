@@ -1,0 +1,36 @@
+criando classes no angular com comandos
+ng g class models/usuario --type=model
+
+
+https://www.w3schools.com/bootstrap/bootstrap_ref_js_dropdown.asp
+
+
+npm install bootstrap jquery popper.js --save
+
+"styles": [
+  "node_modules/bootstrap/dist/css/bootstrap.css",
+  "src/styles.scss"
+],
+
+"scripts": [
+  "node_modules/jquery/dist/jquery.js",
+  "node_modules/popper.js/dist/umd/popper.js",
+  "node_modules/bootstrap/dist/js/bootstrap.js"
+]
+
+
+Package                           Version
+-----------------------------------------------------------
+@angular-devkit/architect ----------- 0.803.6
+@angular-devkit/build-angular ------ 0.803.6
+@angular-devkit/build-optimizer ---- 0.803.6
+@angular-devkit/build-webpack ----- 0.803.6
+@angular-devkit/core ---------------- 8.3.6
+@angular-devkit/schematics -------- 8.3.6
+@angular/cli -------------------------  8.3.6
+@ngtools/webpack ------------------ 8.3.6
+@schematics/angular --------------- 8.3.6
+@schematics/update ---------------- 0.803.6
+rxjs ----------------------------------- 6.4.0
+typescript ---------------------------- 3.5.3
+webpack ----------------------------- 4.39.2

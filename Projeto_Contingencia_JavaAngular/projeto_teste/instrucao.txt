@@ -1,0 +1,11 @@
+#configuração do bootstrap no angular.json
+https://pt.stackoverflow.com/questions/413526/como-configurar-bootstrap-4-com-angular-8-3-6-utilizando-angular-json
+
+#Usar esta configuração para apontar diretamente para o arquivo do bootstrap diretamente
+em todos os arquivo de ***.css dos componentes da aplicação ---->>>> @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+npm install bootstrap@4.0.0 –save
+
+npm install popper.js –save
+
+npm install jquery –save

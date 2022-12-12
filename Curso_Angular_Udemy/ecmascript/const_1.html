@@ -1,0 +1,22 @@
+<html>
+    <boby>
+       teste do comportamento do LET
+        <script>
+            // escopo: global, funçao, bloco
+            // const não tem hoisting
+            const SERIES = 'The game of thrones';
+            console.log('Global: ', SERIES);
+
+            function escopoFuncao(){
+                if(true){
+                    console.log('Global: ', SERIE); 
+                }              
+            }
+            escopoFuncao()
+            console.log('Global: ', SERIE);
+            {
+                console.log('Global: ', SERIE);    
+            }
+        </script>
+    </boby>
+</html>

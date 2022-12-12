@@ -1,0 +1,44 @@
+.container-pai{
+    background-color: rgb(155, 155, 155);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.filho1 {    
+    width:100%;
+    height: 300px;
+    /*background-color:rgb(255, 217, 0); */
+    background-image: linear-gradient( to top, rgb(250, 246, 188), rgb(248, 193, 74), rgb(251, 162, 59));   
+}
+.titulo{
+    margin-top: 0;
+    height:60px;
+    width:100%;
+    background-color: rgb(54, 53, 53);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 900;
+    color: #fff;
+    text-align: center;     
+}
+h4{
+    font: 40px Arial, Helvetica, sans-serif;
+    font-size: 900;
+    color: rgb(75, 74, 74);
+    text-align: center;
+}
+.filho2 {
+    width:100%;
+    height: 400px;
+    background-color:rgb(255, 255, 255);
+}
+.filho3 {
+    width:100%;
+    height: 300px;
+    background-color:rgb(25, 91, 94);
+}
+.filho4{
+    width:100%;
+    height: 400px;
+    background-color:rgb(11, 52, 54);
+}

@@ -1,0 +1,52 @@
+#style-form-cadastro-geral{
+    margin-top: 30px;
+    padding: 20px;
+    width: 70rem;
+}
+#style-form-tipOcorrence-local{
+    display: flex;
+    justify-content: flex-start;
+}
+
+#stile-select-sel1{
+    width: 50em;
+}
+#stile-select-sel2{
+    margin-left: 5em;
+    width: 15em;
+}
+#style-local{
+    margin-left: 5em;
+}
+#style-form-datetimelocal{
+    display: flex !important;
+    justify-content:  space-between;
+}
+#style-form-sel3{
+    width: 10rem;
+}
+#style-form-orgao{
+    width: 500px;
+}
+#style-form-orgao-space{
+    margin-right: -40px;
+}
+#style-form-botao{
+    margin-top: 20px;
+    display:flex !important;    
+}
+#style-botao-2{
+    margin-left: 20px;
+}
+#style-form-justificativa{
+    margin-top: 30px;
+}
+#style-form-caixa-selecao-dupla{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
+#style-form-selecaoServicos{
+    width: 70rem;
+}
